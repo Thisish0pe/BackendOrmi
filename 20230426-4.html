@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input&get</title>
+</head>
+<body>
+    <!-- autocomplete = 자동완성 기능 -->
+    <form method="get" autocomplete="off">
+    <div>
+        <fieldset>
+            <legend>제목</legend>
+            <label for="user-name">이름</label>
+            <input id="user-name"type="text" name="name" placeholder="이름">
+        </fieldset>
+    </div>
+
+    <div>
+        <input type="button" value="버튼">
+        <button type="button">button</button>
+    </div>
+
+    <div>
+        <label for="user-age">나이</label>
+        <input id="user-age" type="number" name="age">
+    </div>
+
+    <button type="submit">submit</button>
+    <button type="button">button</button>
+    <button type="reset">reset</button>
+    </form>
+
+    <br>
+    <br>
+<form method="get" autocomplete="on">
+    <!-- value 와 placeholder 의 차이점
+    placeholder 같은 경우에는 다음 이미지처럼 input으로 예상되는 값에 대한 힌트를 나타낼 때 사용해요. 그럼 사용자는 이 내용을 보고 무엇을 입력해야 하는지에 대해 유추할 수 있어요. 그리고 사용자가 무언가 입력하게 되면 placeholder는 사라지게 되고, 단순히 힌트로서의 역할만 하기 때문에 백엔드와는 관련이 없는 항목이에요.
+
+    value 같은 경우에는 실체가 있는 값이에요. 보통 디폴트 값을 설정해줄 때 사용되고 placeholder와는 다르게 value는 사용자가 값을 수정하려고 할때 직접 지워야 한다는 차이가 있어요. 만약 디폴트 값으로 설정된 value가 있는 상태에서 폼을 제출하게 된다면 이 값이 서버로 전송되기 때문에 백엔드와 관련이 있다고 볼 수 있습니다.  -->
+    <input type="text" name="name" placeholder="이름" value="홍길동">
+    <input type="text" name="name2" placeholder="이름2" minlength="2" maxlength="5" required>
+    <input type="email" name="email" placeholder="이메일 주소">
+    <input type="search" name="search" placeholder="검색">
+    <input type="url" name="url" placeholder="url">
+    <input type="tel" name="tel" placeholder="연락처" maxlength="11">
+
+    <br>
+
+    <input type="checkbox" id="chk1" checked><label for="chk1">동의하시겠습니까?</label>
+    <input type="radio" name="gender" id="female" checked><label for="female">여성</label>
+    <input type="radio" name="gender" id="male" ><label for="male">남성</label>
+    <input type="file" accept="image/png, image/jpeg" multiple>
+    <input type="number" min="0" max="100" step="10" value="10">
+</form>
+
+<!-- 제출 목적이 아니라면 form 태그 사용 안 해도 무방 -->
+<label>이름
+    <input type="text" id="text" placeholder="이름">
+</label>
+
+<button id="button" type="button">입력</button>
+<p>이름:<strong id="strong"></strong></p>
+<label>이름
+    <input type="text" id="text" placeholder="이름">
+</label>
+
+<script>
+    const inputText = document.querySelector('#test');
+    const button = document.querySelector('#button');
+    const strong = document.querySelector('#strong');
+
+    button.addEventListener('click', function() {
+        strong.innerHTML = inputText.value;
+    })
+</script>
+
+</body>
+</html>
