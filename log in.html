@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>log in</title>
+    <link rel="stylesheet" href="../CSS/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">로그인</h1>
+
+      <p class="description">아이디와 비밀번호를 입력하고 로그인하세요.</p>
+      <!-- 비밀번호가 있기 때문에  get으로 하는 경우 비밀번호가 URL에 다 나타나기 때문에 post로 해야함 -->
+      <form mathod="post" autocomplete="off">
+        <div>
+          <label class="label-width" for="user-name">이름</label>
+          <input id="user-name" type="text" name="name" />
+        </div>
+        <div>
+          <label class="label-width" for="user-pw">비밀번호</label>
+          <input id="user-pw" type="password" name="password" />
+        </div>
+        <div>
+          <input id="chk" type="checkbox" />
+          <label for="chk">아이디 저장</label>
+        </div>
+        <div>
+          <button class="submit-button" type="submit">로그인</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
