@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select</title>
+</head>
+<body>
+    <label>오늘의 메뉴</label>
+    <!-- 메뉴 선택하는 항목 select -->
+    <select>
+        <optgroup label="점심">
+            <!-- select 는 option 이라는 자식 태그가 필요함 -->
+            <option>간장계란밥</option>
+            <option>라면</option>
+            <option selected>쟁반짜장</option>
+        </optgroup>
+        <optgroup label="저녁">
+            <!-- select 는 option 이라는 자식 태그가 필요함 -->
+            <option>간장계란밥</option>
+            <option>라면</option>
+            <option selected>쟁반짜장</option>
+        </optgroup>
+    </select>
+
+    <fieldset>
+        <legend>사용기술</legend>
+        <label><input type="checkbox">HTML</label>
+        <label><input type="checkbox">CSS</label>
+        <label><input type="checkbox">JS</label>
+        <label><input type="checkbox">PYTHON</label>
+    </fieldset>
+
+    <!-- textatrea -->
+    <!-- input text 와 다른 점은 textarea는 박스가 한 줄이 아닌 크게 설정이 가능하다 (flexable) -->
+    <textarea cols="50" rows="50" placeholder="텍스트를 입력해주세요."></textarea>
+
+
+</body>
+</html>

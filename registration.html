@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration</title>
+    <link rel="stylesheet" href="../CSS/style-registration.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="title">회원가입</h1>
+      <p class="description">원활한 서비스 이용을 위해 회원가입을 해주세요.</p>
+
+      <form action="post" autocomplete="off">
+        <div>
+          <label class="label-width" for="user-id">아이디</label>
+          <input id="user-id" type="text" name="name" />
+        </div>
+        <div>
+          <label class="label-width" for="user-email">이메일</label>
+          <input id="user-email" type="email" name="email" />
+        </div>
+        <div>
+          <label class="label-width" for="user-pw">비밀번호</label>
+          <input id="user-pw" type="password" name="password" />
+        </div>
+        <div>
+          <label class="label-width" for="user-nickname">닉네임</label>
+          <input id="user-nickname" type="text" name="nickname" />
+        </div>
+        <div>
+          <!-- CSS 성별 display : inline-block 변경 (완)-->
+          <legend class="label-width2">성별</legend>
+
+          <input id="male" type="radio" name="gender" value="male" />
+          <label for="male">남성</label>
+
+          <input id="female" type="radio" name="gender" value="female" />
+          <label for="female">여성</label>
+
+          <input id="no" type="radio" name="gender" value="no" />
+          <label for="no">선택 안함</label>
+        </div>
+        <div>
+          <legend class="label-width">사용 기술</legend>
+
+          <input type="checkbox" name="html" id="html" value="html" />
+          <label for="html">HTML</label>
+
+          <input type="checkbox" name="css" id="css" value="css" />
+          <label for="css">CSS</label>
+
+          <input
+            type="checkbox"
+            name="javascript"
+            id="javascript"
+            value="javascript"
+          />
+          <label for="javascript">JavaScript</label>
+
+          <input type="checkbox" name="python" id="python" value="python" />
+          <label for="python">Pyton</label>
+
+          <input type="checkbox" name="django" id="django" />
+          <label for="django">Django</label>
+
+          <input type="checkbox" name="github" id="github" />
+          <label for="github">GitHub</label>
+
+          <input type="checkbox" name="postgresql" id="postgresql" />
+          <label for="postgresql">PostgreSQL</label>
+        </div>
+        <div>
+          <button class="submit-button" type="submit">회원가입</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

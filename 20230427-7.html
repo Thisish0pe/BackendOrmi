@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>선택자</title>
+    <style>
+      * {
+        /* 초기값 초기 세팅하기 위해서 */
+        margin: 0;
+        padding: 0;
+        /* border: 5px solid royalblue;
+        padding: 20px; */
+      }
+      p {
+        color: red;
+      }
+      /* 아래꺼 왜 안되지? */
+      #hello {
+        dorder: 1px soild royalblue;
+      }
+      .hi {
+        background-color: yellow;
+      }
+      h1.hi {
+        color: seagreen;
+      }
+
+      /* 특성 선택자 [] */
+      [type="email"] {
+        border-color: red;
+      }
+      input[type="email"] input[type="text"] {
+        border: 1px soild whitesmoke;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1 class="hi">Hello</h1>
+      <p>Hello</p>
+      <p class="hi">Hello</p>
+      <button type="button">Hello</button>
+      <input type="text" id="hello" /><label for="hello"></label>
+
+      <br />
+      <input type="email" id="email" /><label for="email">email</label><br />
+      <input type="text" id="text" /><label for="email">text</label>
+    </div>
+  </body>
+</html>
