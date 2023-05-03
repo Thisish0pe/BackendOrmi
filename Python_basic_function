@@ -1,0 +1,786 @@
+##함수
+
+1. 코드를 재사용 할 수 있으며, 실수를 줄일 수 있습니다.
+2. 코드의 구조를 한 눈에 파악할 수 있습니다.
+
+# 파선아실 (파라미터는 선언할 때, 아규먼크는 실제)
+def function(x, y):#x, y파라미터
+    z = x + y
+    return z
+print(f'function(5, 7) = {function(5, 7)}') #5.7 아규먼트
+
+#같은코드1
+def function(x, y):
+    z = x + y #return이 없으면 none
+print(f'function(5, 7) = {function(5, 7)}')
+
+#같은코드2
+def function(x, y):
+    z = x + y
+    return  #return이 없으면 none
+print(f'function(5, 7) = {function(5, 7)}')
+
+#같은코드3
+def function(x, y):
+    z = x + y
+    return None #return이 없으면 none
+print(f'function(5, 7) = {function(5, 7)}')
+
+def  hello():
+    print('1')
+    print('2')
+    print('3')
+
+print (hello())
+
+# 함수연습문제1
+def one():
+    print('one1')
+    print('one2')
+    print('one3')
+    return 100
+
+def  two():
+    print('two1')
+    print('two2')
+    one()
+    return
+
+print (two())
+
+# 함수연습문제2
+def one():
+    print('one1')
+    print('one2')
+    print('one3')
+    return 100
+
+def  two():
+    print('two1')
+    print('two2')
+    x = one()
+    return x+x
+
+print (two())
+
+# two1
+# two2
+# one1
+# one2
+# one3
+# 200
+
+# 함수연습문제3
+
+def one(a, b):
+    print('one1')
+    print('one2')
+    print('one3')
+    return a + b
+
+def two(x):
+    y = 100
+    print('two1')
+    print('two2')
+    x = one(x, y)
+    return x + x
+
+print(two(10))
+
+
+# 함수연습문제4
+
+def one():
+    print('one')
+    return 10
+
+def two():
+    print('two')
+    return 10
+
+def three():
+    print('three')
+    return 10
+
+a = one()
+b = two()
+c = three()
+print(a + b)
+print(a + b + c)
+
+# one
+# two
+# three
+# 20
+# 30
+
+# 좋지 않은 예 입니다!
+def one():
+    print('one')
+    print('one')
+    print('one')
+    return 10
+
+def two():
+    print('two')
+    print('two')
+    print('two')
+    return 10
+
+def three():
+    print('three')
+    print('three')
+    print('three')
+    return 10
+
+print(one() + two())
+print(one() + two() + three())
+
+# 함수란 무엇일까? 
+# 함수의 이름은 메모리 상에 코드블럭을 가리키는 변수
+
+leehojun = print
+leehojun ('hello') #소괄호는 코드블럭을 실행시키는 명령어가 되는 것
+
+id(leehojun), id(print)
+
+def hello():
+    def custom_sum (a, b):
+        return a + b
+    return custom_sum
+
+c=hello()
+c(10, 100)
+
+## 함수의 기본 기능
+
+# 파선아실 (파라미터는 선언할 때, 아규먼크는 실제)
+def function(x, y):
+    z = x + y
+    return z
+print(f'function(5, 7) = {function(5, 7)}') 
+
+#return을 만나게 되면 함수는 종료가 됩니다.
+def function(x, y):
+    z = x + y
+    return z
+print(function(5, 7)) 
+
+#return을 빨리 만나게 해주세요
+#early return : 조건이 부합하지 않으면 바로 return을 하도록 하는 코딩 패턴으로 가독성이 좋은 코드
+
+# def custom_sum(x, y):
+#     if (type(x) != int and type(x) != float) and (type(y) != int and type(y) != float): #예외 조건은 항시 위에 두기
+#         return '연산할 수 없습니다.'
+#     z = x + y # 100줄이라 가정
+#     return z
+# print(custom_sum(5,'가'))
+
+# if (type(x) != int and type(x) != float) or (type(y) != int and type(y) != float):
+
+def custom_sum(x, y):
+    if type(x) != int or type(y) != int:
+        return '연산할 수 없습니다.'
+    z = x + y # 100줄이라 가정
+    return z
+print(custom_sum(5, '가나다'))
+
+
+# 함수 안에 함수
+def one():
+    def two():
+        print('hello1')
+    def three():
+        print('hello2')
+    return 100
+
+print(one())
+
+def one():
+    def two():
+        print('hello1')
+        def three():
+            print('hello2')
+        two()
+        three()
+        return 100
+
+print(one())
+
+# 함수 안의 함수와 함수 안의 변수
+
+# 함수 밖의 함수와 함수 밖의 변수
+# 밖에 있는 변수를 '가져오는 것만'가능합니다
+
+def test():
+    print('test')
+
+def one():
+    test()
+
+def two():
+    test()
+
+one()
+two()
+test ()
+
+# 밖에 있는 변수를 '가져오는 것만'가능합니다
+# 밖의 변수를 수정하는 것은 안됩니다.
+
+test = 100
+
+def one():
+    print(test)
+
+def two():
+    print(test)
+
+one()
+two()
+
+## 지역 변수와 전역 변수
+
+# 지역변수와 전역변수
+#이렇게 하시면 error가 납니다. 밖에 있는 변수는 수정이 안됩니다.
+test = 10
+
+def one():
+    test =test+10
+
+
+# 전역변수 :접근은 가능하지만 수정이 되지 않음
+a = 100
+def f():
+    a = a + 1
+f()
+
+#전연변수를 함수 내부에서 수정이 되게끔 하는 것 
+#권하지 않음 
+a = 100
+def f():
+    global a 
+    a = a + 1
+f()
+print(a)
+# global은 실무에서 사용 안 하게 되어있음
+
+a = 100
+def f(x):
+    x = x+1
+    return x
+a = f(a)
+print (a)
+
+# 순수함수 : 밖에 있는 변수들을 가지고 오지 않아 예측이 가능하게 하는 것 
+def f(x):
+    return x + x + 100
+f(10)
+f(20)
+
+#아규먼트 값에 따라 다르지만
+#아규먼트에 2배해서 100이 더해진다는 사실은 변하지 않음
+
+# 순수함수 아니게 만들어보자
+test=100
+def f(x):
+    return x + x + 100 + test
+f(10)
+f(20)
+# test 값이 다른 곳에서 조작이 되면 더해지는 값이 200이 안될 수 있음
+# 예측이 불가능한 상황이 되어버리는 것 (핵심)
+
+#지역변수: 함수 안 에서만 접근할 수 있는 것 
+#전역변수 : 전역에서 접근할 수 있는 것 (수정 하지마!!!)
+
+a = 100
+def one():
+    a = 10
+    print(a)
+
+one()
+print(a)
+# 전역부터 찾아봅니다
+
+#어려워요? 그럼 pass
+#전역까지 찾아 올라갑니다. 전역에도 없으면 error
+a = 100
+def one():
+    a = 10
+    def two():
+        def three():
+            a = 1000
+            print (a)
+        three()
+        print(a)
+    two()
+    print(a)
+one()
+print(a)
+
+# error가 나는 코드
+x = 100
+def outer():
+    x = 1
+    def inner():
+        x += 1
+        print(x)
+    inner()
+    print(x)
+
+outer()
+print(x)
+
+#ineer가 outer에 변수를 건드리고 싶은데 inner안에서는 x에 수정권한이 전혀 없음
+#nonlocal 활용
+x = 100
+def outer():
+    x = 1
+    def inner():
+        nonlocal x
+        x += 1
+        print(x)
+    inner()
+    print(x)
+
+outer()
+print(x)
+
+#global 그냥 써버린다?
+x = 100
+def outer():
+    x = 1
+    def inner():
+        global x
+        x += 1
+        print(x)
+    inner()
+    print(x)
+
+outer()
+print(x)
+
+##재귀함수
+
+- 내가 나를 호출하는 것
+- 재귀 <-> for문은 대부분 서로 호환 가능
+(그래서 for 사용하는 것 권장)
+- 어렵고 효율도 안 좋아요 
+- 필수적으로 사용하는 곳이 있습니다. (분할과 정복, 다이나믹 프로그래밍, 닥익스트라)
+
+#sys.setrecursionlimit -> 제한을 늘릴 수 있음
+#실행시키지 마세요!!! 1이 엄청 많아져요
+def 숫자출력():
+    print(1)
+    return 숫자출력()
+숫자출력()
+
+# for로 펙토리얼 계산하기
+# 펙토리얼 : 5!= 5*4*3*2*1
+
+result=1
+for i in range(1, 6):
+    result *= i
+    
+result
+
+# 재귀로 펙토리얼 계산하기
+
+def f(n):
+    if n <= 1:
+        return 1
+
+    else:
+        return n * f(n-1)
+
+f(5)
+
+'''
+f(n)    n * f(n-1)
+f(5)    5 * f(4) == 5 * 24 => 120
+f(4)    4 * f(3) == 4 * 6
+f(3)    3 * f(2) == 3 * 2
+f(2)    2 * f(1) == 2 * 1
+f(2)    1
+'''
+
+# for 로 문자열 거꾸로 출력하기
+s = 'hello'
+result = ''
+
+for i in s:
+    result = i + result
+
+result
+
+'''
+'h'+''
+'e'+'h'
+'l'+ 'eh'
+'l' + 'leh'
+'o' + 'lleh'
+'''
+
+'''
+s[::-1] slicing 사용하는 게 더 빨라요
+'''
+
+def reverse(s):
+    if len(s) == 1:
+        return s
+    else:
+        return reverse(s[1:]) + s[0]
+
+reverse('hello')
+
+'''
+reverse ('hello') reverse('ello') + 'h' == 'olle' + 'h' => 출력값
+reverse ('ello')  reverse('llo') + 'eh' == 'oll' + 'e'
+reverse ('llo')   reverse('lo') + 'leh' == 'ol' + 'l'
+reverse ('lo')    reverse('o') + 'lleh' == 'o' + 'l'
+reverse ('o')     1
+'''
+
+# 피보나치 순열 
+# 재귀가 얼마나 비효율적인지 보는 시간
+
+#   1 1 2 3 5 8 13 21
+
+current =1
+next =1
+for i in range(1, 5):
+    current, next = next, current +next
+
+next
+
+# 재귀순열 피보나나치 도전
+# 이해하지 않아도 됩니다 
+# 이만큼 필효율적이구나? 를 보는 것 
+
+def f(n):
+    if n == 1 or n==2:
+        return 1
+    return f(n-1) + f(n-2)
+
+1, 1, f(3) ,f(4) ,f(5) ,f(6)
+
+
+f(30)
+
+# 재귀의 비효율을 이렇게 해결할 수는 있더라~
+# 그러나 가능하면 for을 이용해주세요
+
+from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def fib(num):
+    if num == 0:
+        return 0
+    if num == 1 or num == 2:
+        return 1
+    else:
+        return fib(num-1) + fib(num-2)
+
+fib(40)
+
+## !! 함수 문제풀이
+
+#연습문제
+
+#1. 다음 코드를 실행하면 출려되는 값을 순서대로 작성해보세요.
+a = 'pithon'
+
+def 함수1():
+    def 함수2():
+        print('love')
+        
+    print('I')
+    함수2()
+    return "python"
+	
+
+a = 함수1()
+print(a)
+
+'''
+I
+Love
+Python
+Pithon
+'''
+
+a = 'pithon'
+print('재할당 전의 a: ', a)
+
+def 함수1():
+    def 함수2():
+        print('love')
+
+    print('I')
+    함수2()
+    return "python"
+
+print('재할당 전의 a: ', a)
+a = 함수1()
+print('재할당 후의 a: ', a)
+
+# 연습문제2
+
+#2.함수를 이용하여 계산기 프로그램을 만들어주세요.
+
+def plus(num1, num2):
+	num3 = num1 + num2
+    return num3
+
+print (plus(10,5))
+
+def minus(num1, num2):
+	#이곳을 채워주세요
+
+def multiply(num1, num2):
+	#이곳을 채워주세요
+
+def divide(num1, num2):
+	#이곳을 채워주세요
+
+print(f'plus : {plus(10, 5)}')
+print(f'minus : {minus(10, 5)}')
+print(f'multiply : {multiply(10, 5)}')
+print(f'divide : {divide(10, 5)}')
+
+
+
+#2.함수를 이용하여 계산기 프로그램을 만들어주세요.
+
+def plus(num1, num2):
+    return num1 + num2
+
+
+def minus(num1, num2):
+	return num1-num2
+
+def multiply(num1, num2):
+    return num1*num2
+
+def divide(num1, num2):
+    return num1/num2
+
+print(f'plus : {plus(10, 5)}')
+print(f'minus : {minus(10, 5)}')
+print(f'multiply : {multiply(10, 5)}')
+print(f'divide : {divide(10, 5)}')
+
+plus = lambda num1, num2 : num1 + num2
+minus = lambda num1, num2 : num1 - num2
+multiply = lambda num1, num2 : num1 / num2
+divide = lambda num1, num2 : num1 * num2
+
+print(f'plus : {plus(10, 5)}')
+print(f'minus : {minus(10, 5)}')
+print(f'multiply : {multiply(10, 5)}')
+print(f'divide : {divide(10, 5)}')
+
+# 연습문제
+# x의 n제곱을 구하는 함수를 만들어주세요. 재귀함수를 이용하여 만들어야하며, x은 0이 아닙니다. (x, n > 1)
+
+x=3
+def 제곱(n):
+    if n == 0:
+        return 1
+    return x * 제곱(n-1)
+
+제곱(3)
+
+def f(n):
+    if n <= 1:
+        return 1
+    else:
+        return n * f(n-1)
+
+f(3)
+
+def 제곱(x):
+    def 승수(y):
+        return x**y
+    return 승수
+
+제곱3 = 제곱(3)
+제곱3(4)
+
+### list (리스트)
+
+- 순서를 가진 데이터들의 집합
+- 값의 변경 가능
+- 리스트 안의 리스트인 다차원 리스트 가능
+- 리스트 안의 다른 딕셔너리, 셋, 튜플 넣기 가능
+- 
+
+# 컨벤션 자료형 (딕셔너리, 튜플, 셋, 리스트)
+
+l = [1000, 2000, 3000, 1000, 2000, 3000]
+id(l[0]), id(l[3])
+
+s= 'hello world'
+s[0]
+
+data =[[1, 2, 3], 
+       [4,5,6], 
+       [7,8,9]]
+
+data
+
+data[0]
+
+data[0][0]
+
+data =[[1, 2, 3], 
+       [4,5,6], 
+       [7,8,9]]
+
+data[0][0] *= 2
+data[0][1] *= 2
+data[0][2] *= 2
+data[1][0] *= 2
+data[1][1] *= 2
+data[1][2] *= 2
+data[2][0] *= 2
+data[2][1] *= 2
+data[2][2] *= 2
+
+data
+
+data =[[1, 2, 3], 
+       [4,5,6], 
+       [7,8,9]]
+for i in range(3):
+    for j in range(3):
+        data[i][j] *= 2
+
+data
+
+'''
+3       == 스칼라
+[3, 4]  = 벡터
+[[1, 2, 3], = 메트릭스 (행렬)
+[4,5,6], 
+[7,8,9]]
+[[[1], [2], [3]], = 텐서 (다차원 3차원 이상)
+[[4],[5],[6]], 
+[[7],[8],[9]]]]
+
+인공지능 중 유명한 라이브러리 => 텐서플로우
+'''
+
+#리스트 주의해야하는 연산
+#곱하기
+
+x =[10] *3
+x
+
+x [0]=100
+x
+
+x =[[10] * 2] *3
+x
+
+x [0][0]=100
+x
+
+l = [10, 20, 30]
+type(l) , dir (l), help(l)
+
+## 리스트의 메서드
+
+# 'clear', 'copy', 'count', 'extend', 'index',
+# 'insert', 'pop', 'remove', 'reverse', 'sort'
+
+
+
+l=[1,2,3]
+l.append(4)
+l   
+
+l=[1,2,3]
+l.extend([1,2,3])
+l   
+
+l=[1,2,3]
+l.extend({'one':2 , 'two': 2})
+l 
+
+l=[1,2,3]
+l.clear()
+l   
+
+제주과일가게 = [['바나나',1000],['수박', 2000],['딸기',3000]]
+서울과일가게=제주과일가게
+서울과일가게[0]=['바나나',2000]
+서울과일가게,제주과일가게
+
+제주과일가게 = [['바나나',1000],['수박', 2000],['딸기',3000]]
+서울과일가게=제주과일가게.copy()
+서울과일가게[0]=['바나나',2000]
+서울과일가게,제주과일가게
+
+s ='hello world'
+s[:5] 
+
+
+l=[10,20,30,40,50]
+l[:3]
+ll=l[:]
+ll
+
+id(l), id(ll)
+
+제주과일가게 = [['바나나', 1000], ['수박', 2000], ['딸기', 3000]]
+# 서울과일가게 = 제주과일가게[:] # 얕은 복사
+서울과일가게 = 제주과일가게.copy() # 얕은 복사
+id(서울과일가게[0]), id(제주과일가게[0])
+id(서울과일가게[0][0]), id(제주과일가게[0][0])
+서울과일가게[0][1] = 3000
+서울과일가게, 제주과일가게
+
+l = [1,2,3]
+ll = l[:]
+l[0]=1000
+l ,ll
+
+# count 별 다섯 개
+
+a = [1, 2, 3, 1, 2, 3, 1, 1, 1]
+a.count(1)
+
+a = [10, 1, 1, 11, 2, 23, 12]
+a.index(11) #find 가 없어요 list에는/ 맨 처음에만 찾은 index 줌
+a[:a.index(11)]
+
+a = [10,20,30]
+a.insert(2, 10000000) #insert는 값을 지우지 않음 
+a
+
+# pop 별 다섯 개
+l=[10,20,30,40,50]
+# l.pop() #index 처럼 찾고 그걸 없앨 수 있음
+l.pop(0)
+l
+
+# append: 맨 뒤에 추가
+# pop: 맨 뒤에서 값을 뽑아내고 index들어가면 index에서 뽑습니다.
+# insert: index에 값을 삽입하고 원래 있던 값을 뒤로 밀어내는 것
+
+
+l= [10, 20, 30, 40, 50]
+l.remove(20) #주의사항 : for 돌면서 remove하지 말기
+l
+
+l =[5,6,4,4,8,9,1]
+l.reverse()
+l
+
+l =[5,6,4,4,8,9,1]
+print(list(reversed(l))) 
+print(l)
+
+#l.reverse(): 리스트에 메서드/ return none / 역순, 원본을 만집니다.
+#reversed(): built_in function  / return역순/ 원본을 만지지 않음
