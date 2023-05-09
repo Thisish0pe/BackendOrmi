@@ -1,0 +1,1306 @@
+break과 continue
+[ ]
+for i in range(10):
+    print(i)
+    if i == 5:
+        break
+0
+1
+2
+3
+4
+5
+[ ]
+# 모든 for가 중단이 되는 것은 아닙니다!
+# 자신을 감싸고 있는 단일 반복문만 탈출합니다.
+for i in range(10):
+    print('----------------')
+    print(i)
+    for j in range(10):
+        print(i, j)
+        if i == 5:
+            break
+----------------
+0
+0 0
+0 1
+0 2
+0 3
+0 4
+0 5
+0 6
+0 7
+0 8
+0 9
+----------------
+1
+1 0
+1 1
+1 2
+1 3
+1 4
+1 5
+1 6
+1 7
+1 8
+1 9
+----------------
+2
+2 0
+2 1
+2 2
+2 3
+2 4
+2 5
+2 6
+2 7
+2 8
+2 9
+----------------
+3
+3 0
+3 1
+3 2
+3 3
+3 4
+3 5
+3 6
+3 7
+3 8
+3 9
+----------------
+4
+4 0
+4 1
+4 2
+4 3
+4 4
+4 5
+4 6
+4 7
+4 8
+4 9
+----------------
+5
+5 0
+----------------
+6
+6 0
+6 1
+6 2
+6 3
+6 4
+6 5
+6 6
+6 7
+6 8
+6 9
+----------------
+7
+7 0
+7 1
+7 2
+7 3
+7 4
+7 5
+7 6
+7 7
+7 8
+7 9
+----------------
+8
+8 0
+8 1
+8 2
+8 3
+8 4
+8 5
+8 6
+8 7
+8 8
+8 9
+----------------
+9
+9 0
+9 1
+9 2
+9 3
+9 4
+9 5
+9 6
+9 7
+9 8
+9 9
+[ ]
+# continue는 다음 루프로 갑니다.
+# 아래 코드에서 continue는 의미가 없습니다.
+for i in range(10):
+    print(i)
+    if i == 5:
+        continue
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+[ ]
+# continue는 다음 루프로 갑니다.
+# 아래 코드에서 continue는 아래 print를 실행시키지 않고
+# 다음 루프로 가게됩니다.
+for i in range(10):
+    if i == 5:
+        continue
+    print(i)
+0
+1
+2
+3
+4
+6
+7
+8
+9
+[ ]
+for i in range(10):
+    if i == 5:
+        pass # 공백을 채워주는 역활만 합니다.
+    print(i)
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+[ ]
+for i in range(10):
+    print(i)
+    i += 2 # 작동이 되지 않습니다.
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+[ ]
+for i in range(0, 10, 2):
+    print(i)
+0
+2
+4
+6
+8
+[ ]
+# 실행과 동시에 정지를 눌러주세요.
+# 무한반복입니다.
+# 아래 코드는 효율적이지 못하니
+# 뒤에서 배울 generator로 무한반복을 구현해주세요.
+l = [1]
+for i in l:
+    l.append(i+1)
+    print(i)
+for와 else 구문
+[ ]
+# 다른 언어에서는 이 구문이 작동되지 않습니다.
+for i in range(10):
+    if i == 5:
+        break
+else:
+    print('정상종료!')
+[ ]
+# 반복문 + else구문은
+# 반복문이 break을 쓰지 않고 정상 종료되었을 때
+# else 구문이 실행됩니다.
+
+for i in range(10):
+    if i == 5:
+        pass
+else:
+    print('정상종료!')
+정상종료!
+리스트 표현식(list comprehension)
+[ ]
+# 별 3.5개
+# 리스트 안에 반복문이나 조건문을 넣어 한 번에 리스트를 생성하는 기법
+# 리스트 표현식은 for보다 빠릅니다! (가독성 + 속도우위)
+l = []
+for i in range(10):
+    l.append(i)
+l
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[ ]
+[i for i in range(10)]
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[ ]
+# 이정도만 하실 수 있으면 우리 수업에서는 문제 없습니다.
+l = []
+for i in range(10):
+    if i % 2 == 0:
+        l.append(i)
+l
+[0, 2, 4, 6, 8]
+[ ]
+[i for i in range(10) if i % 2 == 0]
+[0, 2, 4, 6, 8]
+[ ]
+list(range(0, 10, 2)) # 이것도 가능하고, 직관적이죠.
+[0, 2, 4, 6, 8]
+[ ]
+l = ['aa', 'abc', 'bbb', 'ccc', 'aba']
+[i for i in l if 'a' in i]
+['aa', 'abc', 'aba']
+[ ]
+# 아래 코드는 어떻게 할까요?
+l = []
+for i in range(10):
+    if i % 2 == 0:
+        l.append(i)
+    elif i % 3 == 0:
+        l.append(i)
+l
+[0, 2, 3, 4, 6, 8, 9]
+[ ]
+l = []
+for i in range(10):
+    if i % 2 == 0 or i % 3 == 0:
+        l.append(i)
+l
+[0, 2, 3, 4, 6, 8, 9]
+[ ]
+[i for i in range(10) if i % 2 == 0 or i % 3 == 0]
+[0, 2, 3, 4, 6, 8, 9]
+[ ]
+# [i for i in range(10) if i % 2 == 0 elif i % 3 == 0] # error
+[ ]
+# 구구단
+# 손으로 꼭 순회 1번씩 돌아보셔야 합니다.
+# for i in range(2, 10):
+#     for j in range(1, 10):
+#         print(i, j, i*j)
+
+'''
+# step 0
+# 이렇게 손이나 문자열로 늘여트려놓고
+# 내가 무엇을 줄일 수 있을까?를 고민하세요.
+2 1 2
+2 2 4
+2 3 6
+2 4 8
+2 5 10
+2 6 12
+2 7 14
+2 8 16
+2 9 18
+3 1 3
+3 2 6
+3 3 9
+3 4 12
+3 5 15
+3 6 18
+3 7 21
+3 8 24
+3 9 27
+'''
+
+# step 1 ~ 100 이렇게 하나씩 줄여가면 됩니다.
+# for i in range(1, 10):
+#     print(2, i, 99)
+
+# step 1 ~ 100 이렇게 하나씩 줄여가면 됩니다.
+# for i in range(1, 10):
+#     print(2, i, 2*i)
+
+for 단 in range(2, 10):
+    for i in range(1, 10):
+        print(단, i, 단*i)
+[ ]
+# 별찍기
+# 트리 만드는 문제도 있고, 원 만드는 문제도 있고...
+'''
+*
+**
+***
+****
+*****
+'''
+[ ]
+user_input = int(input('찍을 별의 층수?'))
+for i in range(1, user_input+1):
+    print('*' * i)
+찍을 별의 층수?5
+*
+**
+***
+****
+*****
+[ ]
+l = []
+for i in range(2, 10):
+    for j in range(1, 10):
+        l.append([i, j, i*j])
+l
+[ ]
+[[i, j, i*j] for i in range(2, 10) for j in range(1, 10)]
+다중 리스트 순회
+[ ]
+skill = [
+        ('고기잡이', 100),
+        ('고기팔기', 120),
+        ('낚시', 5),
+        ('통발', 5),
+        ('큰그물', 5)
+]
+
+for i, j in skill:
+    print(i,j)
+[ ]
+skill_name = ['고기잡이', '고기팔기', '낚시']
+skill_point = [100, 120, 5]
+
+for i, j in zip(skill_name, skill_point):
+    print(i,j)
+[ ]
+# 이정도 코드만 아셔도 실무하는 것에는 무리가 없습니다.
+skill = [
+        ('고기잡이', [1, 100]),
+        ('고기팔기', [1, 100]),
+        ('낚시', [2, 100]),
+        ('통발', [2, 100]),
+        ('큰그물', [2, 100])
+]
+
+for i, j in skill:
+    print(i, j)
+[ ]
+skill = [
+        ('고기잡이', [1, 100]),
+        ('고기팔기', [1, 100]),
+        ('낚시', [2, 100]),
+        ('통발', [2, 100]),
+        ('큰그물', [2, 100])
+]
+
+for i, [x, y] in skill:
+    print(i, x, y)
+고기잡이 1 100
+고기팔기 1 100
+낚시 2 100
+통발 2 100
+큰그물 2 100
+[ ]
+skill = [
+        ('고기잡이', (1, 100)),
+        ('고기팔기', (1, 100)),
+        ('낚시', (2, 100)),
+        ('통발', (2, 100)),
+        ('큰그물', (2, 100))
+]
+
+for i, [x, y] in skill:
+    print(i, x, y)
+고기잡이 1 100
+고기팔기 1 100
+낚시 2 100
+통발 2 100
+큰그물 2 100
+[ ]
+skill = [
+        ('고기잡이', 'ab'), # ('고기잡이', 'abcd') 이런 형태는 error
+        ('고기팔기', 'cd'),
+        ('낚시', 'aa'),
+        ('통발', 'cc'),
+        ('큰그물', 'dd')
+]
+
+for i, [x, y] in skill:
+    print(i, x, y)
+고기잡이 a b
+고기팔기 c d
+낚시 a a
+통발 c c
+큰그물 d d
+[ ]
+# 문제
+# data는 다음과 같은 데이터가 있습니다.
+# 각각 skill 이름, skill 제한 레벨, skill 포인트, skill 등급입니다.
+# 아래와 같이 출력해주세요.
+data = [
+        ('고기잡이', (1, 100, 'S')),
+        ('고기팔기', (1, 100, 'A')),
+        ('낚시', (2, 100, 'A')),
+        ('통발', (2, 100, 'B')),
+        ('큰그물', (2, 100, 'S'))
+]
+
+# 출력값
+# 아래와 같은 형식으로 총 5개 출력해야 합니다.
+# '축하합니다. S등급에 skill 고기잡이를 습득하셨습니다! 
+#  해당 스킬은 레벨 제한 1에 스필 포인트 100입니다.'
+[ ]
+for name,(level_limit, point, rank) in data:
+    print(f'축하합니다. {rank}등급의 skill {name}을(를) 습득하셨습니다!')
+    print(f'해당 스킬은 레벨 제한 {level_limit}에 스킬 포인트 {point}입니다.')
+축하합니다. S등급의 skill 고기잡이을(를) 습득하셨습니다!
+해당 스킬은 레벨 제한 1에 스킬 포인트 100입니다.
+축하합니다. A등급의 skill 고기팔기을(를) 습득하셨습니다!
+해당 스킬은 레벨 제한 1에 스킬 포인트 100입니다.
+축하합니다. A등급의 skill 낚시을(를) 습득하셨습니다!
+해당 스킬은 레벨 제한 2에 스킬 포인트 100입니다.
+축하합니다. B등급의 skill 통발을(를) 습득하셨습니다!
+해당 스킬은 레벨 제한 2에 스킬 포인트 100입니다.
+축하합니다. S등급의 skill 큰그물을(를) 습득하셨습니다!
+해당 스킬은 레벨 제한 2에 스킬 포인트 100입니다.
+[ ]
+for idx, (name, (level, point, rank)) in enumerate(data):
+    print(f'축하합니다. {rank}등급의 skill {name}를 습득하셨습니다!\n해당 스킬은 레벨 제한 {level}에 스킬 포인트 {point} 입니다.')
+축하합니다. S등급의 skill 고기잡이를 습득하셨습니다!
+해당 스킬은 레벨 제한 1에 스킬 포인트 100 입니다.
+축하합니다. A등급의 skill 고기팔기를 습득하셨습니다!
+해당 스킬은 레벨 제한 1에 스킬 포인트 100 입니다.
+축하합니다. A등급의 skill 낚시를 습득하셨습니다!
+해당 스킬은 레벨 제한 2에 스킬 포인트 100 입니다.
+축하합니다. B등급의 skill 통발를 습득하셨습니다!
+해당 스킬은 레벨 제한 2에 스킬 포인트 100 입니다.
+축하합니다. S등급의 skill 큰그물를 습득하셨습니다!
+해당 스킬은 레벨 제한 2에 스킬 포인트 100 입니다.
+[ ]
+# 이 풀이가 좋습니다.
+for name, (level, point, rank) in data:
+    print(f'축하합니다. {rank}등급의 skill {name}를 습득하셨습니다!\n해당 스킬은 레벨 제한 {level}에 스킬 포인트 {point} 입니다.')
+축하합니다. S등급의 skill 고기잡이를 습득하셨습니다!
+해당 스킬은 레벨 제한 1에 스킬 포인트 100 입니다.
+축하합니다. A등급의 skill 고기팔기를 습득하셨습니다!
+해당 스킬은 레벨 제한 1에 스킬 포인트 100 입니다.
+축하합니다. A등급의 skill 낚시를 습득하셨습니다!
+해당 스킬은 레벨 제한 2에 스킬 포인트 100 입니다.
+축하합니다. B등급의 skill 통발를 습득하셨습니다!
+해당 스킬은 레벨 제한 2에 스킬 포인트 100 입니다.
+축하합니다. S등급의 skill 큰그물를 습득하셨습니다!
+해당 스킬은 레벨 제한 2에 스킬 포인트 100 입니다.
+while
+[ ]
+# 반복문 : for, while
+a = 1
+while a < 10: # True인 동안에
+    print(a)
+    a += 1
+1
+2
+3
+4
+5
+6
+7
+8
+9
+[ ]
+# while 특정요소:
+#     특정요소 값 꺼내는 문법
+#     특정요소가 모두 없어질 때까지
+
+l = [1, 2, 3]
+while l: # []
+    print(l.pop())
+3
+2
+1
+[ ]
+l = {1, 2, 3}
+while l: 
+    print(l.pop())
+1
+2
+3
+[ ]
+# 중복되는 문자열 중 가장 첫번째 나온
+# 문자의 index를 반환하라!
+s = 'abkkkbnbbbccdennnnneefefg'
+ss = set(s)
+while ss:
+    string = ss.pop()
+    print(string, s.index(string))
+c 10
+d 12
+f 21
+b 1
+a 0
+k 2
+e 13
+n 6
+g 24
+[ ]
+# 이러한 무한반복은 메모리를 모두 소진합니다.
+# 서버가 뻗을 수도 있습니다.
+while True:
+    user_input = input('$')
+    split_data = user_input.split(' ')
+    if split_data[0] == 'mkdir':
+        print(f'{split_data[1]} 폴더가 생성되었습니다!')
+    elif split_data[0] == 'rmdir':
+        print(f'{split_data[1]} 폴더가 삭제되었습니다!')
+    elif split_data[0] == 'exit':
+        print('프로그램을 종료합니다.')
+        break
+$exit
+프로그램을 종료합니다.
+[ ]
+import random
+
+random.randint(1, 100)
+14
+[ ]
+import random
+# up down game
+
+result = random.randint(1, 100)
+
+while True:
+    user_input = int(input())
+    if user_input > result:
+        print('down')
+    elif user_input < result:
+        print('up')
+    else:
+        print('맞췄습니다!')
+        print('프로그램을 종료합니다.')
+        break
+50
+down
+25
+down
+12
+down
+9
+맞췄습니다!
+프로그램을 종료합니다.
+[ ]
+# 구구단이 출력되지 않는 코드
+# 한땀한땀 따라가면서 왜 출력이 되지 않는지 체크해보세요.
+x = 2
+y = 1
+while x < 10:
+    while y < 10:
+        print(x, y, x * y)
+        y += 1
+    x += 1
+2 1 2
+2 2 4
+2 3 6
+2 4 8
+2 5 10
+2 6 12
+2 7 14
+2 8 16
+2 9 18
+[ ]
+# 구구단이 출력되지 않는 코드
+# 한땀한땀 따라가면서 왜 출력이 되지 않는지 체크해보세요.
+x = 2
+y = 1
+while x < 10:
+    while y < 10:
+        print(x, y, x * y)
+        y += 1
+    y = 1 # 초기화를 해주어야 다음 while에서 y < 10에 들어갈 수 있습니다.
+    x += 1
+[ ]
+count = 0
+while True:
+    print(count)
+    if count == 5:
+        break
+    count += 1
+print('end')
+0
+1
+2
+3
+4
+5
+end
+[ ]
+# 무한루프
+count = 0.0
+while True:
+    print(count)
+    if count == 0.3: #부동소수점 문제가 발생할 수 있습니다.
+        break
+    count += 0.1
+print('end')
+[ ]
+# 0.30000000000000004
+count = 0.0
+while True:
+    print(count)
+    if count >= 0.3:
+        break
+    count += 0.1
+print('end')
+0.0
+0.1
+0.2
+0.30000000000000004
+end
+[ ]
+# 다른 언어에서는 이 구문이 작동되지 않습니다.
+i = 0
+while i < 10:
+    if i == 5:
+        break
+    i += 1
+else:
+    print('정상종료!')
+[ ]
+i = 0
+while i < 10:
+    i += 1
+else:
+    print('정상종료!')
+정상종료!
+https://school.programmers.co.kr/learn/courses/30/lessons/120871
+[ ]
+# step1
+count10 = 0
+n = 15
+while count10 < n + 1:
+    print(count10)
+    count10 += 1
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+[ ]
+# step2 조건만 간단히 구현
+count10 = 0
+count3 = 0 # 3x 마을에서 쓰는 숫자
+n = 5
+while count10 < n + 1:
+    count10 += 1
+    count3 += 1
+    if count3 % 3 == 0 or '3' in str(count3):
+        count3 += 1
+    # 저주의 숫자를 지나가도 다시 저주의 숫자일수 있습니다
+    # 체크를 계속해야하는데 한 번만 합니다
+    print(count10, count3)
+
+count3
+1 1
+2 2
+3 4
+4 5
+5 7
+6 8
+8
+[ ]
+# step3 조건만 간단히 구현 => 조건이 계속 반복되도록
+count10 = 0
+count3 = 0 # 3x 마을에서 쓰는 숫자
+n = 10
+while count10 < n:
+    count10 += 1
+    count3 += 1
+    while count3 % 3 == 0 or '3' in str(count3):
+        count3 += 1
+    # 저주의 숫자를 지나가도 다시 저주의 숫자일수 있습니다
+    # 체크를 계속해야하는데 한 번만 합니다
+    print(count10, count3)
+1 1
+2 2
+3 4
+4 5
+5 7
+6 8
+7 10
+8 11
+9 14
+10 16
+[ ]
+# step3 조건만 간단히 구현 => 조건이 계속 반복되도록
+count10 = 0
+count3 = 0 # 3x 마을에서 쓰는 숫자
+n = 10
+while count10 < n:
+    count10 += 1
+    count3 += 1
+    while count3 % 3 == 0 or '3' in str(count3):
+        count3 += 1
+    print(count10, count3)
+[ ]
+def solution(n):
+    count10 = 0
+    count3 = 0
+    while count10 < n:
+        count10 += 1
+        count3 += 1
+        while count3 % 3 == 0 or '3' in str(count3):
+            count3 += 1
+    return count3
+[ ]
+[i for i in range(1, 31) if i % 3 != 0 and not('3' in str(i))][n-1]
+[1, 2, 4, 5, 7, 8, 10, 11, 14, 16, 17, 19, 20, 22, 25, 26, 28, 29]
+[ ]
+def solution(n):
+    return [i for i in range(1, 1001) if i % 3 != 0 and not('3' in str(i))][n-1]
+예외처리(try, except, else)
+[ ]
+# try:
+#   실행문
+# except:
+#   예외 발생 시 처리문
+# else:
+#   예외 발생하지 않을 경우 실행문
+[ ]
+try:
+    i = 1
+    j = 0
+    x = i/j
+except:
+    print("error")
+else:
+    print(x)
+1.0
+실제 데이터를 가지고 연습 (json gen)
+[ ]
+data = [
+  {
+    "_id": "6459c9f4ebc9d86c2a656d5e",
+    "index": 0,
+    "age": 27,
+    "name": "Burgess Hammond",
+    "gender": "male"
+  },
+  {
+    "_id": "6459c9f4d99872fea5ad0459",
+    "index": 1,
+    "age": 38,
+    "name": "Leon Luna",
+    "gender": "male"
+  },
+  {
+    "_id": "6459c9f4234b6e3701033326",
+    "index": 2,
+    "age": 35,
+    "name": "Huber Nieves",
+    "gender": "male"
+  }
+]
+
+# 반복문을 사용해도 좋지만,
+# 반복문을 사용하실 수 없다면 index로만 계산하셔도 좋습니다.
+data[0]
+data[0]['age']
+data[0]['gender']
+100
+[ ]
+#Lv0
+(data[0]['age'] + data[1]['age'] + data[2]['age']) / 3
+
+성별 = []
+성별.append(data[0]['gender'])
+성별.append(data[1]['gender'])
+성별.append(data[2]['gender'])
+print(성별)
+print(성별.count('male') / len(data) * 100)
+print(성별.count('female') / len(data) * 100)
+0.0
+[ ]
+#Lv1
+age_sum = 0
+for i in range(3): # 좋은 코드는 아닙니다.
+    age_sum += data[i]['age']
+age_sum / 3
+
+성별 = []
+for i in range(3):
+    성별.append(data[i]['gender'])
+print(성별.count('male') / len(data) * 100)
+print(성별.count('female') / len(data) * 100)
+100.0
+0.0
+[ ]
+#Lv1
+age_sum = 0
+for i in range(len(data)):
+    age_sum += data[i]['age']
+age_sum / 3
+
+성별 = []
+for i in range(len(data)):
+    성별.append(data[i]['gender'])
+print(성별.count('male') / len(data) * 100)
+print(성별.count('female') / len(data) * 100)
+[ ]
+#Lv2
+
+# 평균 (1줄)
+# list(map(lambda x:x['age'], data))
+sum(map(lambda x:x['age'], data)) / len(data)
+
+# 성별 (1줄)
+len(list(filter(lambda x:x['gender'] == 'male', data))) / len(data) * 100
+len(list(filter(lambda x:x['gender'] == 'female', data))) / len(data) * 100
+0.0
+[ ]
+# Q1
+# sol1
+sum([elem['age'] for elem in data]) / len(data)
+
+# sol2
+sum(map(lambda x:x['age'], data)) / len(data)
+
+# Q2
+gender = [elem['gender'] for elem in data]
+male = gender.count('male')
+female = gender.count('female')
+print(f'{male/len(gender)*100:.2f} : {female/len(gender)*100:.2f}')
+100
+[ ]
+# Q1
+# sol1
+sum([elem['age'] for elem in data]) / len(data)
+
+# sol2
+sum(map(lambda x:x['age'], data)) / len(data)
+
+# Q2
+gender = [elem['gender'] for elem in data]
+male = gender.count('male')
+female = gender.count('female')
+malepercentage = male/len(gender)*100
+femalepercentage = female/len(gender)*100
+print(f'{malepercentage:.2f} : {femalepercentage:.2f}')
+[ ]
+# solve1
+average_age = sum(map(lambda x: x['age'], data))/len(data)
+male = len(list(filter(lambda x: x['gender'] == 'male', data)))
+female = len(list(filter(lambda x: x['gender'] == 'female', data)))
+
+print(f'평균나이는 {average_age} 입니다.\n성비는 남성 {male} : 여성 {female} 입니다.')
+
+# solve2
+average_age = sum(map(lambda x: x['age'], data))/len(data)
+gender = list(map(lambda x : x['gender'], data))
+gender_count = [gender.count('male'), gender.count('female')]
+print(f'평균나이는 {average_age} 입니다.\n성비는 남성 {gender_count[0]} : 여성 {gender_count[1]} 입니다.')
+알아야 하는 built-in function
+수학적 통계에 활용되는 함수
+abs( ) : 괄호 안에 있는 값을 절대값으로 출력해줍니다.
+all( ) : 괄호 안에 있는 값들이 모두 True(False)일 때 True(False)를 출력합니다.
+any( ) : 괄호안에 있는 값이 하나라고 True이면 True로 출력합니다.
+pow( ) : 제곱을 출력합니다.
+max( ) : 값의 최댓값을 출력합니다.
+min( ) : 값의 최솟값을 출력합니다.
+sum( ) : 값의 합계를 출력합니다.
+len( ) : 문자열의 길이를 출력합니다.
+sorted( ) : 데이터를 정렬해줍니다.
+reversed( ) : 정렬되지 않은 상태에서 값을 역순으로 출력합니다.
+[ ]
+abs(-1)
+all([True, True, True])
+all([True, True, False])
+all(['a', 'b', 'ccc'])
+all(['a', '', 'ccc'])
+if all([3 > 5, 12 % 2 == 0, 15 % 5 == 0]):
+    print('hello')
+
+if all([3 > 5, 
+        12 % 2 == 0, 
+        15 % 5 == 0]):
+    print('hello')
+
+
+if 3 > 5 and 12 % 2 == 0 and 15 % 5 == 0:
+    print('hello')
+
+# if all([one(), two(), three()]):
+#     print('hello')
+
+# all(True, True, True) # all() takes exactly one argument (3 given)
+
+pow(2, 3) # 2 ** 3
+8
+[ ]
+sum([[1, 2], [3, 4], [5, 6]], [])
+sum([1, 2, 3, 4, 5], 100)
+# sum([1, 2, 3, 4, 5], {1, 2, 3}) # error
+[ ]
+# __len__가 없는 것들 : map, zip, filter...
+class str(str):
+    def __len__(self):
+        return 1000
+
+len(str('hello world'))
+1000
+[ ]
+# len(zip([1, 2, 3], 'abc')) # error
+형변환 함수
+set( )
+dict( )
+hex( ) : 16진법
+bin( ) : 2진법
+oct( ) : 8진법
+bool( )
+str( )
+ord( ) : 각각의 문자에 대한 숫자값을 출력해줍니다.(유니코드표를 참고하세요.)
+float( )
+tuple( )
+chr( ) : 숫자값을 통해서 문자를 출력합니다.
+list( )
+range( )
+complex( )
+[ ]
+l = [1, 2, 3]
+type(l)
+list
+[ ]
+# 아래 3개는 int형
+# bin( ) : 2진법
+# oct( ) : 8진법
+# hex( ) : 16진법
+bin(7)
+type(bin(7))
+0b111
+type(0b111)
+int('111', 2)
+int('0b111', 2)
+# int(0b111, 2) #error
+[ ]
+chr(65)
+ord('A')
+65
+[ ]
+# list(range(start, stop, step))
+list(range(0, 10, 2))
+list(range(0, 10))
+list(range(10))
+list(range(-10, 10, 2))
+list(range(0, -10, -2))
+[0, -2, -4, -6, -8]
+도움말
+[ ]
+def hojun():
+    '''
+    이호준이 작성한 함수
+    '''
+    pass
+
+help(hojun)
+Help on function hojun in module __main__:
+
+hojun()
+    이호준이 작성한 함수
+
+object 관련 함수
+dir( )
+id( )
+type( )
+[ ]
+# dir() # directory에 약자로 대상이 가진 attribute를 모두 출력합니다.
+# attribute가 무엇인가? class에서 배울 멤버 + 메서드 입니다.
+[ ]
+def f():
+    return 100
+
+f.name = 'leehojun'
+dir(f)
+print(f.name)
+leehojun
+[ ]
+# 배우는 재미
+# 단시간에 될 수 없습니다. => 경쟁력
+[ ]
+l = 10
+# 복사가 제대로 이뤄졌나?
+id(l) # 깊은복사, 얕은복사
+140662941172240
+[ ]
+type('abc') # str
+print(type('abc')) # <class 'str'>
+# print(type(f)) # class가 전체 Python을 관통하고 있습니다.
+<class 'str'>
+<class 'function'>
+유용한 순회 가능 객체
+enumerate( ) : 값에 순위를 매기고 싶을 때 사용합니다.
+range( )
+sorted( )
+reversed( )
+filter( )
+zip( )
+map( )
+[ ]
+print(type(range(3)))
+<class 'range'>
+[ ]
+list(enumerate([10, 20, 30]))
+[(0, 10), (1, 20), (2, 30)]
+[ ]
+list(enumerate([10, 20, 30], 100))
+# list(enumerate([10, 20, 30], 'abc')) # error 뒤에 숫자를 입력해야 합니다.
+[ ]
+def 함수(x):
+    return x > 15
+
+list(filter(함수, [10, 20, 30, 40]))
+list(filter(None, [True, True, False, False]))
+# filter에 None 주는 것이 어디에 유용할까요?
+# 여러가지 자료형이 섞여 있을 때 값이 들어있는 것만 찾을 경우
+list(filter(None, [[], 'abc', '', ''])) 
+['abc']
+[ ]
+list(zip('abc', 'defaaaa', 'ght', [1, 2, 3], [4, 5, 6, 7]))
+[('a', 'd', 'g', 1, 4), ('b', 'e', 'h', 2, 5), ('c', 'f', 't', 3, 6)]
+[ ]
+x = [5, 4, 6, 8, 2]
+list(zip('abcdefg', sorted(x)))
+[('a', 2), ('b', 4), ('c', 5), ('d', 6), ('e', 8)]
+[ ]
+x = [5, 4, 6, 8, 2]
+y = [7, 6, 45, 4, 2, 3, 3]
+list(zip('abcdefg', zip(x, y)))
+[('a', (5, 7)), ('b', (4, 6)), ('c', (6, 45)), ('d', (8, 4)), ('e', (2, 2))]
+args, kargs
+가변 아규먼트, 가변 키워드 아규먼트
+[ ]
+def print_args(a, *args): # 꼭 args가 될 필요는 없습니다.
+    print(args)
+
+print_args(100, True, 'leehojun')
+(100, True, 'leehojun')
+[ ]
+def print_kwargs(a, **kwargs): # 꼭 kargs가 될 필요는 없습니다.
+    print(a)
+    print(kwargs)
+
+print_kwargs(100, name='leehojun', age='10')
+100
+{'name': 'leehojun', 'age': '10'}
+[ ]
+def print_args(*args, b): # error입니다.
+    print(args)
+
+print_args(100, True, 'leehojun')
+[ ]
+def print_args(b, *args): # error입니다.
+    print(args)
+
+print_args(100, True, 'leehojun')
+(True, 'leehojun')
+[ ]
+def print_args(b, *args): # error입니다. args 앞에 순서대로 넣을 변수가 있어야 합니다.
+    print(args)
+
+print_args(100, True, b='leehojun')
+[ ]
+one, two, *three = 1, 2, 3, 4, 5 # *가 하는 역활은? 남은 데이터의 패킹
+print(one, two, three)
+1 2 [3, 4, 5]
+lambda
+lambda 는 익명함수라고 하며, 이름이 없는 함수
+[ ]
+leehojun = lambda x : x**2
+
+# def leehojun(x):
+#     return x ** 2
+[ ]
+print(type(leehojun))
+<class 'function'>
+[ ]
+print(type(lambda x : x**2))
+<class 'function'>
+[ ]
+print(dir(lambda x : x**2))
+['__annotations__', '__builtins__', '__call__', '__class__', '__closure__', '__code__', '__defaults__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__get__', '__getattribute__', '__globals__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__kwdefaults__', '__le__', '__lt__', '__module__', '__name__', '__ne__', '__new__', '__qualname__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+[ ]
+def 함수(x):
+    return x ** 2
+
+print(dir(함수))
+['__annotations__', '__builtins__', '__call__', '__class__', '__closure__', '__code__', '__defaults__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__get__', '__getattribute__', '__globals__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__kwdefaults__', '__le__', '__lt__', '__module__', '__name__', '__ne__', '__new__', '__qualname__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+[ ]
+def add(x, y):
+    return x + y
+def sub():
+    pass
+def div():
+    pass
+def mul():
+    pass
+
+caculator = [add, sub, div, mul]
+print(caculator[0](10, 20))#0번째 값은 add 입니다.
+
+caculator2 = [lambda x,y:x+y, 
+              lambda x,y:x-y, 
+              lambda x,y:x/y, 
+              lambda x,y:x*y]
+
+print(caculator2[0](10, 20)) #0번째 값은 add 입니다.
+print(caculator2[0](10, 20))
+30
+30
+30
+[ ]
+def f():
+    return lambda x,y:x+y
+
+f()(10, 20)
+30
+[ ]
+def f():
+    return lambda x:lambda i:i**2
+
+f()(1)(10)
+100
+[ ]
+def f():
+    return lambda x:lambda i:x*i**2
+
+f()(2)(10)
+200
+lambda 실무 응용
+lambda가 응용되는 곳 : map, filter, max, min, sorted
+[ ]
+# 실무에서도 많이 사용됩니다.
+def 제곱(x):
+    return x ** 2
+
+# 재사용 하는 경우에는 함수로 선언하는 경우도 있습니다.
+list(map(제곱, [1, 2, 3, 4]))
+list(map(제곱, [1, 2, 3, 4]))
+
+list(map(lambda x : x ** 2, [1, 2, 3, 4]))
+[ ]
+# 질문1 : 람다함수를 재귀로 사용할 수 있나요?
+# 답 : Yes
+fact = lambda x: 1 if x == 0 else x * fact(x-1)
+fact(5)
+
+# 질문2 : 클로저 함수에 대한 질문
+# 답 : 클로저는 내일 나갑니다.
+120
+!! 오늘 배운 것 정리
+반복문
+
+정해진 순서를(next) 반복하는 것
+
+형태
+
+# for 변수 in 순회가능한객체: # stopItoration까지 반복
+#     code
+
+# while 조건: # true까지 반복
+#     code 
+순회 가능한 객체(이터러블 객체) : 문자열, 리스트, 튜플, 딕셔너리, 셋, range, enumerate, map, set, sorted, reverse 등
+
+순회 불가능한 객체 : int, float 등
+
+code 안에서 변수를 사용하지 않을 경우 언더바를 관습적으로 사용합니다.
+
+# for _ in 순회가능한객체:
+#     code
+반복문 다음 else 구문 : break 없이 정상 종료 되면 실행
+
+반복문 안에 break 구문 : 자신을 감싸고 있는 반복문 1개 탈출
+
+반복문 안에 continue 구문 : 다음 루프로 넘어감
+
+반복문 안에 pass : 공백만 채워줄 뿐 아무 기능 없음
+
+bulit-in function
+
+수학적 통계에 활용되는 함수
+
+abs( ) : 괄호 안에 있는 값을 절대값으로 출력해줍니다.
+all( ) : 괄호 안에 있는 값들이 모두 True(False)일 때 True(False)를 출력합니다.
+any( ) : 괄호안에 있는 값이 하나라고 True이면 True로 출력합니다.
+pow( ) : 제곱을 출력합니다.
+max( ) : 값의 최댓값을 출력합니다.
+min( ) : 값의 최솟값을 출력합니다.
+sum( ) : 값의 합계를 출력합니다.
+len( ) : 문자열의 길이를 출력합니다.
+sorted( ) : 데이터를 정렬해줍니다.
+reversed( ) : 정렬되지 않은 상태에서 값을 역순으로 출력합니다.
+형변환 함수
+
+set( )
+dict( )
+hex( ) : 16진법
+bin( ) : 2진법
+oct( ) : 8진법
+bool( )
+str( )
+ord( ) : 각각의 문자에 대한 숫자값을 출력해줍니다.(유니코드표를 참고하세요.)
+float( )
+tuple( )
+chr( ) : 숫자값을 통해서 문자를 출력합니다.
+list( )
+range( )
+complex( )
+도움말
+
+help( )
+object 관련 함수
+
+dir( )
+id( )
+type( )
+순회 가능한 객체
+
+enumerate( ) : 값에 순위를 매기고 싶을 때 사용합니다.
+range( )
+sorted( )
+reversed( )
+filter( )
+zip( )
+map( )
+args, kargs
+
+가변 아규먼트, 가변 키워드 아규먼트
+
+def print_args(*args): # 꼭 args가 될 필요는 없습니다.
+  print(args)
+
+print_args(100, True, 'leehojun')
+
+####
+
+def print_kwargs(**kwargs): # 꼭 kargs가 될 필요는 없습니다.
+print(kwargs)
+
+print_kwargs(name='leehojun', age='10')
+lambda
+
+lambda 는 익명함수라고 하며, 이름이 없는 함수
+
+보통은 다시 사용되지 않을 함수를 선언할 때 사용
+
+leehojun = lambda x : x**2
+
+# def leehojun(x):
+#     return x ** 2
+
+list(map(lambda x : x ** 2, [1, 2, 3, 4]))
