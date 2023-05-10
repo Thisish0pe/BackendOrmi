@@ -1304,3 +1304,1118 @@ leehojun = lambda x : x**2
 #     return x ** 2
 
 list(map(lambda x : x ** 2, [1, 2, 3, 4]))
+
+클래스
+클래스는 데이터(멤버)와 기능(메서드)을 가지고 있는 인스턴트 객체를 생성하기 위한 역할
+
+우리가 배우고 있는 Python을 객체 지향 프로그래밍 언어
+
+  현실                                코드
+  차 ---------------------------> class Car()
+  정수 -------------------------> class int()
+  실수 -------------------------> class float()
+
+  인간이 만들어 
+  놓은 현실 세계에서의 
+  정의 또는 약속 --------------> class
+
+  1 + 1 = 2가 컴퓨터 입장에서는 10일 수도 있고
+  'A' + 'A' = 'AA'가 아니라 컴퓨터 입장에서는 130일 수 있습니다.
+[ ]
+class CarFactory(object): # 첫 문자는 대문자로 합니다.
+    max_speed = 300
+    max_people = 5
+    # 아래 self는 스스로를 가리키기에
+    # self는 인스턴스를 가리킵니다.
+    def move(self):
+        print('차가 움직이고 있습니다.')
+    def stop(self):
+        print('차가 멈췄습니다.')
+
+# 클래스로 바로 접근해서 무엇을 하는 것을 권고하지 않습니다.
+# (제대로 알지 못하는 상태에서(인스턴스 변수, 클래스 변수))
+print(CarFactory.max_speed)
+k5 = CarFactory() # 붕어빵(인스턴스) = 붕어빵틀(클래스)
+k3 = CarFactory() # 차(인스턴스) = 자동차공장(클래스)
+300
+[ ]
+class CarFactory(object):
+    max_speed = 300
+    max_people = 5
+    def move(self):
+        print('차가 움직이고 있습니다.')
+    def stop(self):
+        print('차가 멈췄습니다.')
+
+k5 = CarFactory()
+k3 = CarFactory()
+k5.move()
+k3.move()
+k5.stop()
+k3.stop()
+print(k5.max_speed)
+300
+차가 움직이고 있습니다.
+차가 움직이고 있습니다.
+차가 멈췄습니다.
+차가 멈췄습니다.
+300
+[ ]
+d = {'one':10, 'two':20}
+# d.three = 30
+d['three'] = 30
+print(d['three'])
+30
+[ ]
+def f():
+    pass
+f.one = 10
+f.two = 20
+f.three = 30
+print(f.one)
+10
+[ ]
+# 메서드 : 클래스 내에 함수
+# 멤버 : 클래스 내에 변수
+class CarFactory(object):
+    max_speed = 300
+    max_people = 5
+    def __init__(self, userInputName): # 인스턴스가 만들어질 때 실행되는 메서드
+        self.name = userInputName
+    def move(self):
+        print(self.name, '차가 움직이고 있습니다.')
+    def stop(self):
+        print(self.name, '차가 멈췄습니다.')
+
+k5 = CarFactory('케이파이브')
+k3 = CarFactory('케이쓰리')
+k5.move()
+k3.move()
+k5.stop()
+k3.stop()
+print(k5.max_speed)
+케이파이브 차가 움직이고 있습니다.
+케이쓰리 차가 움직이고 있습니다.
+케이파이브 차가 멈췄습니다.
+케이쓰리 차가 멈췄습니다.
+300
+[ ]
+k3.name
+k3.max_speed
+300
+[ ]
+print(type(k3))
+print(dir(k3))
+# 'max_people', 멤버
+# 'max_speed', 멤버
+# 'move', 메소드
+# 'name', 멤버
+# 'stop' 메소드
+<class '__main__.CarFactory'>
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'max_people', 'max_speed', 'move', 'name', 'stop']
+[ ]
+l = [10, 20, 30]
+print(type(l))
+print(dir(l))
+# 메소드
+# 'append', 'clear', 'copy', 'count', 'extend', 
+# 'index', 'insert', 'pop', 'remove', 'reverse', 'sort'
+<class 'list'>
+['__add__', '__class__', '__class_getitem__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+[ ]
+class list(object):
+    def __add__(self):
+        pass
+    def __class__(self):
+        pass
+    def __class_getitem__(self):
+        pass
+    def __eq__(self):
+        pass
+    def __ge__(self):
+        pass 
+    # ... 생략 ...
+    def append(self):
+        pass
+    def clear(self):
+        pass
+    def copy(self):
+        pass
+    def count(self):
+        pass
+    def extend(self):
+        pass
+    def index(self):
+        pass
+    # ... 생략 ...
+[ ]
+# 클래스 변수
+# 클래스 바로 하위에 자리하고 있으며
+# 모든 인스턴스가 공유합니다.
+class Car(object):
+    # kinds가 인스턴스에 없기에 class변수로 접근
+    # speed는 값을 = 로 할당했기에 인스턴스변수 생성
+    kinds = []
+    speed = 300
+    def add_kinds(self, name):
+        self.kinds.append(name)
+    def change_speed(self, speed):
+        self.speed = speed
+
+k5 = Car()
+k3 = Car()
+k5.add_kinds('k5')
+k3.add_kinds('k3')
+k5.change_speed(500)
+k3.change_speed(250)
+
+print('k5.kinds:', k5.kinds)
+print('k3.kinds:', k3.kinds)
+print('k5.speed:', k5.speed)
+print('k3.speed:', k3.speed)
+k5.kinds: ['k5', 'k3']
+k3.kinds: ['k5', 'k3']
+k5.speed: 500
+k3.speed: 250
+[ ]
+# 클래스 변수
+# 클래스 바로 하위에 자리하고 있으며
+# 모든 인스턴스가 공유합니다.
+# 인스턴스 변수
+# 인스턴스 영역 안에서만 사용하는 변수
+class Car(object):
+    # kinds가 인스턴스에 없기에 class변수로 접근
+    # speed는 값을 = 로 할당했기에 인스턴스변수 생성
+    kinds = []
+    speed = 300
+    def add_kinds(self, name):
+        self.kinds.append(name) # self.kinds = [name]로 사용하면 인스턴스 변수가 됩니다.
+    def change_speed(self, speed):
+        self.speed = speed
+
+k5 = Car()
+k3 = Car()
+k5.speed = 500
+k3.speed # 클래스 변수는 값을 공유한다고 했는데?
+300
+[ ]
+id()
+[ ]
+주인공 = ['licat', 10000]
+
+class MobFactory(object):
+    def __init__(self, 이름, 공격력, 체력, 마력, 크기_넓이, 크기_높이, 아이템확률, x, y):
+        self.name = 이름
+        self.power = 공격력
+        self.hp = 체력
+        self.mp = 마력
+        self.width = 크기_넓이
+        self.height = 크기_높이
+        self.dropRate = 아이템확률
+
+    def attack(self):
+        주인공[1] -= self.power
+        print(f'{self.name}이 {self.power}데미지로 공격했습니다.')
+        print(f'주인공의 체력이 {주인공[1]}가 되었습니다.')
+
+슬라임 = MobFactory('슬라임', 1, 10, 10, 2, 2, 100, 1, 1)
+오크 = MobFactory('오크', 10, 10, 10, 2, 2, 80, 1, 1)
+고블린 = MobFactory('고블린', 100, 10, 10, 2, 2, 60, 1, 1)
+드래곤 = MobFactory('드래곤', 1000, 10, 10, 2, 2, 40, 1, 1)
+해골 = MobFactory('해골', 10000, 10, 10, 2, 2, 1, 1, 1)
+
+슬라임.attack()
+슬라임이 1데미지로 공격했습니다.
+주인공의 체력이 9999가 되었습니다.
+[ ]
+주인공 = ['licat', 10000]
+
+class MobFactory(object):
+    def __init__(self, 이름, 공격력, 체력, 마력, 크기_넓이, 크기_높이, 아이템확률, x, y):
+        self.name = 이름
+        self.power = 공격력
+        self.hp = 체력
+        self.mp = 마력
+        self.width = 크기_넓이
+        self.height = 크기_높이
+        self.dropRate = 아이템확률
+
+    def attack(self):
+        주인공[1] -= self.power
+        print(f'{self.name}이 {self.power}데미지로 공격했습니다.')
+        print(f'주인공의 체력이 {주인공[1]}가 되었습니다.')
+
+
+오크 = MobFactory('오크', 10, 10, 10, 2, 2, 80, 1, 1)
+고블린 = MobFactory('고블린', 100, 10, 10, 2, 2, 60, 1, 1)
+드래곤 = MobFactory('드래곤', 1000, 100000, 10, 2, 2, 40, 1, 1)
+해골 = MobFactory('해골', 10000, 10, 10, 2, 2, 1, 1, 1)
+
+슬라임.attack()
+슬라임이 1데미지로 공격했습니다.
+주인공의 체력이 9999가 되었습니다.
+[ ]
+주인공 = ['licat', 10000]
+
+class MobFactory(object):
+    def __init__(self, 이름, 공격력, 체력, 마력, 크기_넓이, 크기_높이, 아이템확률, x, y):
+        self.name = 이름
+        self.power = 공격력
+        self.hp = 체력
+        self.mp = 마력
+        self.width = 크기_넓이
+        self.height = 크기_높이
+        self.dropRate = 아이템확률
+
+    def __add__(self, next):
+        if self.name == '슬라임':
+            return MobFactory(f'왕{self.name + next.name}', 
+                              self.power + next.power, 
+                              10, 10, 2, 2, 100, 1, 1)
+        return None
+
+    def attack(self):
+        주인공[1] -= self.power
+        print(f'{self.name}이 {self.power}데미지로 공격했습니다.')
+        print(f'주인공의 체력이 {주인공[1]}가 되었습니다.')
+    
+
+슬라임 = 슬라임 = MobFactory('슬라임', 1, 10, 10, 2, 2, 100, 1, 1)
+왕슬라임 = 슬라임 + 슬라임
+
+왕슬라임.power
+왕슬라임.name
+
+[ ]
+# 성철님 코드
+class User(object):
+    def __init__(self, 이름, 공격력, 체력, 마력, 크기_넓이, 크기_높이, 아이템확률, x, y):
+        self.name = 이름
+        self.power = 공격력
+        self.hp = 체력
+        self.mp = 마력
+        self.width = 크기_넓이
+        self.height = 크기_높이
+        self.dropRate = 아이템확률
+
+    def 슬라임_attack(self):
+        슬라임.hp -= self.power
+        print(f'{self.name}이 {self.power}데미지로 공격했습니다.')
+        print(f'몬스터의 체력이 {슬라임.hp}가 되었습니다.')
+
+licat = User('licat', 5, 10000, 1000, 2, 2, 0, 2, 2)
+licat.슬라임_attack()
+mura = User('mura', 5, 10000, 1000, 2, 2, 0, 2, 2)
+mura.슬라임_attack()
+licat이 5데미지로 공격했습니다.
+몬스터의 체력이 5가 되었습니다.
+mura이 5데미지로 공격했습니다.
+몬스터의 체력이 0가 되었습니다.
+[ ]
+# 개선 코드
+class User(object):
+    def __init__(self, 이름, 공격력, 체력, 마력, 크기_넓이, 크기_높이, 아이템확률, x, y):
+        self.name = 이름
+        self.power = 공격력
+        self.hp = 체력
+        self.mp = 마력
+        self.width = 크기_넓이
+        self.height = 크기_높이
+        self.dropRate = 아이템확률
+
+    def attack(self, target):
+        target.hp -= self.power
+        print(f'{self.name}이 {self.power}데미지로 공격했습니다.')
+        print(f'{target.name}의 체력이 {target.hp}가 되었습니다.')
+
+licat = User('licat', 5, 10000, 1000, 2, 2, 0, 2, 2)
+licat.attack(슬라임)
+licat.attack(드래곤)
+licat이 5데미지로 공격했습니다.
+슬라임의 체력이 -5가 되었습니다.
+licat이 5데미지로 공격했습니다.
+드래곤의 체력이 99995가 되었습니다.
+[ ]
+# 준균님 코드
+class Hero(object):
+    def __init__(self, hero_info):
+        self.info = hero_info
+    def get_info(self):
+        print(f"{self.info['name']}/위치 : {self.info['pos']}/체력 {self.info['hp']}/{self.info['max_hp']} / 레벨{self.info['level']}")
+
+licat = Hero({
+    'name' : 'licat',
+    'pos' : [1,2],
+    'max_hp' : 100,
+    'hp' : 100,
+    'level' : 1,
+})
+
+mura = Hero({
+    'name' : 'mura',
+    'pos' : [5,5],
+    'max_hp' : 200,
+    'hp' : 200,
+    'level' : 5,
+})
+
+licat.get_info()
+mura.get_info()
+[ ]
+# 질문? JAVA의 this와 self가 같은 개념인지?
+# 답? JavaScript나 JAVA의 self와 개념이 비슷한데, 역시나 이렇게 대조를 해가면서 공부를 하면
+# 오해의 여지가 생깁니다. 데이터 구조부터 다르긴 합니다.
+[ ]
+# 동섭님 코드
+고블린 = ['Monster', 5000]
+class PlayerSet(object):
+    def __init__(self, 이름, 물리공격력, 마법공격력, 체력, 마력, 크기_넓이, 크기_높이, 위치_x축, 위치_y축):
+        self.name = 이름
+        self.hit_power = 물리공격력
+        self.magic_power = 마법공격력
+        self.hp = 체력
+        self.mp = 마력
+        self.width = 크기_넓이
+        self.height = 크기_높이
+        self.coordinate_x = 위치_x축
+        self.coordinate_y = 위치_y축
+    def attack(self):
+        고블린[1] -= self.hit_power
+        print(f'{self.name}이 {self.hit_power}데미지로 공격했습니다.')
+        print(f'고블린의 체력이 {주인공[1]}이 되었습니다.')
+    def magic(self):
+        고블린[1] -= self.magic_power
+        self.mp -= 5
+        print(f'{self.name}이 {self.magic_power}데미지로 공격했습니다.')
+        print(f'고블린의 체력이 {고블린[1]}이 되었습니다.')
+        print(f'{self.name}의 마력이 {self.mp}이 되었습니다.')
+
+
+라이캣 = PlayerSet('liecat', 100, 10, 2000, 500, 5, 5, 25, 10)
+뮤라 = PlayerSet('mura', 5, 100, 2000,  1000, 3, 3, 30, 17)
+
+라이캣.attack(), 뮤라.magic()
+라이캣.magic(), 뮤라.attack()
+[ ]
+# 종수님 코드
+class Character(object):
+    def __init__(self, 이름, 직업, 외형):
+        self.name = 이름
+        self.characterClass = 직업
+        self.characterModel = 외형
+        self.x = 0
+        self.y = 0
+    
+    def change_model(self, newCharacterModel):
+        self.characterModel = newCharacterModel
+        print(f'외형 변경 {self.characterModel} -> {newCharacterModel}')
+    
+    def move_left(self):
+        self.x += 1
+        print(f'현재 좌표 ({self.x}, {self.y})')
+    
+    def move_right(self):
+        self.x -= 1
+        print(f'현재 좌표 ({self.x}, {self.y})')
+
+    def move_up(self):
+        self.y += 1
+        print(f'현재 좌표 ({self.x}, {self.y})')
+    
+    def move_down(self):
+        self.y -= 1
+        print(f'현재 좌표 ({self.x}, {self.y})')
+
+licat = Character('licat', 직업=1, 외형=1)
+mura = Character('mura', 2, 2)
+[ ]
+# 쉽고 중요한 예제!
+
+class BlogFactory(object):
+    def __init__(self, 제목, 내용, 조회수, 글쓴이, 생성날짜):
+        self.title = 제목
+        self.content = 내용
+        self.count = 조회수
+        self.writer = 글쓴이
+        self.create_date = 생성날짜
+
+게시글1 = BlogFactory(
+        '오늘 제주의 날씨',
+        '오늘 제주의 날씨는 참 좋네요! 블라블라',
+        '0',
+        '이호준',
+        '2023/05/10',
+    )
+
+게시글2 = BlogFactory(
+        '오늘 부산의 날씨',
+        '오늘 부산의 날씨는 참 좋네요! 블라블라',
+        '1000000',
+        '김재현',
+        '2023/05/10',
+    )
+
+게시글3 = BlogFactory(
+        '오늘 강원의 날씨',
+        '오늘 강원의 날씨는 참 좋네요! 블라블라',
+        '10000',
+        '범남궁',
+        '2023/05/10',
+    )
+    
+게시글1.title
+
+[ ]
+# 쉽고 중요한 예제!
+
+class BlogFactory(object):
+    def __init__(self, 제목, 내용, 조회수, 글쓴이, 생성날짜):
+        self.title = 제목
+        self.content = 내용
+        self.count = 조회수
+        self.writer = 글쓴이
+        self.create_date = 생성날짜
+
+게시글1 = BlogFactory(
+        '오늘 제주의 날씨',
+        '오늘 제주의 날씨는 참 좋네요! 블라블라',
+        '0',
+        '이호준',
+        '2023/05/10',
+    )
+
+게시글2 = BlogFactory(
+        '오늘 부산의 날씨',
+        '오늘 부산의 날씨는 참 좋네요! 블라블라',
+        '1000000',
+        '김재현',
+        '2023/05/10',
+    )
+
+게시글3 = BlogFactory(
+        '오늘 강원의 날씨',
+        '오늘 강원의 날씨는 참 좋네요! 블라블라',
+        '10000',
+        '범남궁',
+        '2023/05/10',
+    )
+
+data = [게시글1, 게시글2, 게시글3]
+for i in data:
+    print(i.title)
+오늘 제주의 날씨
+오늘 부산의 날씨
+오늘 강원의 날씨
+[ ]
+# 쉽고 중요한 예제!
+# 이 코드는 가능하면 손으로 2 ~ 3번 써보시길 권해드립니다.
+
+class BlogFactory(object):
+    def __init__(self, 제목, 내용, 조회수, 글쓴이, 생성날짜):
+        self.title = 제목
+        self.content = 내용
+        self.count = 조회수
+        self.writer = 글쓴이
+        self.create_date = 생성날짜
+
+게시글1 = BlogFactory(
+        '오늘 제주의 날씨',
+        '오늘 제주의 날씨는 참 좋네요! 블라블라',
+        '0',
+        '이호준',
+        '2023/05/10',
+    )
+
+게시글2 = BlogFactory(
+        '오늘 부산의 날씨',
+        '오늘 부산의 날씨는 참 좋네요! 블라블라',
+        '1000000',
+        '김재현',
+        '2023/05/10',
+    )
+
+게시글3 = BlogFactory(
+        '오늘 강원의 날씨',
+        '오늘 강원의 날씨는 참 좋네요! 블라블라',
+        '10000',
+        '범남궁',
+        '2023/05/10',
+    )
+
+data = [게시글1, 게시글2, 게시글3]
+for i in data:
+    if i.writer == '이호준':
+        print(i.title)
+        print(i.content)
+        print(i.count)
+        print(i.create_date)
+오늘 제주의 날씨
+오늘 제주의 날씨는 참 좋네요! 블라블라
+0
+2023/05/10
+[ ]
+data = [게시글1, 게시글2, 게시글3]
+for i in data:
+    print(i.title)
+    print(i.content)
+    print(i.writer)
+    print(i.count)
+    print(i.create_date)
+[ ]
+data = [게시글1, 게시글2, 게시글3]
+for i in data:
+    print(f'<h2>{i.title}</h2>')
+    print(f'<p>{i.content}</p>')
+    print(f'<p>{i.writer}</p>')
+    print(f'<p>{i.count}</p>')
+    print(f'<p>{i.create_date}</p>')
+[ ]
+# 클래스 변수로 글쓴이 찾기
+[ ]
+# 조금 난이도가 있는 예제이기 때문에
+# 기억하지 않으셔도 됩니다.
+
+class BlogFactory(object):
+    dataset = []
+
+    def __init__(self, 제목, 내용, 조회수, 글쓴이, 생성날짜):
+        self.title = 제목
+        self.content = 내용
+        self.count = 조회수
+        self.writer = 글쓴이
+        self.create_date = 생성날짜
+        self.dataset.append(self)
+
+게시글1 = BlogFactory(
+        '오늘 제주의 날씨',
+        '오늘 제주의 날씨는 참 좋네요! 블라블라',
+        '0',
+        '이호준',
+        '2023/05/10',
+    )
+
+게시글2 = BlogFactory(
+        '오늘 부산의 날씨',
+        '오늘 부산의 날씨는 참 좋네요! 블라블라',
+        '1000000',
+        '김재현',
+        '2023/05/10',
+    )
+
+게시글3 = BlogFactory(
+        '오늘 강원의 날씨',
+        '오늘 강원의 날씨는 참 좋네요! 블라블라',
+        '10000',
+        '범남궁',
+        '2023/05/10',
+    )
+
+for i in 게시글1.dataset:
+    print(i.title)
+오늘 제주의 날씨
+오늘 부산의 날씨
+오늘 강원의 날씨
+[ ]
+# x = 10
+# y = 10
+# x.__add__ = lambda self, next : str(self) + str(next) # error
+[ ]
+# python read only method create 가능한가?
+[ ]
+class BlogFactory(object):
+    dataset = []
+
+    def __init__(self, 제목, 내용, 조회수, 글쓴이, 생성날짜):
+        self.title = 제목
+        self.content = 내용
+        self.count = 조회수
+        self.writer = 글쓴이
+        self.create_date = 생성날짜
+        self.dataset.append(self)
+
+    def __str__(self):
+        return 'hello'
+
+게시글1 = BlogFactory(
+        '오늘 제주의 날씨',
+        '오늘 제주의 날씨는 참 좋네요! 블라블라',
+        '0',
+        '이호준',
+        '2023/05/10',
+    )
+
+게시글2 = BlogFactory(
+        '오늘 부산의 날씨',
+        '오늘 부산의 날씨는 참 좋네요! 블라블라',
+        '1000000',
+        '김재현',
+        '2023/05/10',
+    )
+
+print(게시글1, 게시글2)
+hello hello
+[ ]
+# 중요한 예제입니다.
+class BlogFactory(object):
+    dataset = []
+
+    def __init__(self, 제목, 내용, 조회수, 글쓴이, 생성날짜):
+        self.title = 제목
+        self.content = 내용
+        self.count = 조회수
+        self.writer = 글쓴이
+        self.create_date = 생성날짜
+        self.dataset.append(self)
+
+    def __str__(self):
+        return self.title
+
+게시글1 = BlogFactory(
+        '오늘 제주의 날씨',
+        '오늘 제주의 날씨는 참 좋네요! 블라블라',
+        '0',
+        '이호준',
+        '2023/05/10',
+    )
+
+게시글2 = BlogFactory(
+        '오늘 부산의 날씨',
+        '오늘 부산의 날씨는 참 좋네요! 블라블라',
+        '1000000',
+        '김재현',
+        '2023/05/10',
+    )
+
+print(게시글1)
+print(게시글2)
+오늘 제주의 날씨
+오늘 부산의 날씨
+[ ]
+# 중요한 예제입니다.
+class BlogFactory(object):
+    dataset = []
+
+    def __init__(self, 제목, 내용, 조회수, 글쓴이, 생성날짜):
+        self.title = 제목
+        self.content = 내용
+        self.count = 조회수
+        self.writer = 글쓴이
+        self.create_date = 생성날짜
+        self.dataset.append(self)
+
+    def __str__(self):
+        return f'제목 : {self.title}, 내용 : {self.content[:5]}, 글쓴이 : {self.writer}'
+
+게시글1 = BlogFactory(
+        '오늘 제주의 날씨',
+        '오늘 제주의 날씨는 참 좋네요! 블라블라',
+        '0',
+        '이호준',
+        '2023/05/10',
+    )
+
+게시글2 = BlogFactory(
+        '오늘 부산의 날씨',
+        '오늘 부산의 날씨는 참 좋네요! 블라블라',
+        '1000000',
+        '김재현',
+        '2023/05/10',
+    )
+
+print(게시글1)
+print(게시글2)
+제목 : 오늘 제주의 날씨, 내용 : 오늘 제주, 글쓴이 : 이호준
+제목 : 오늘 부산의 날씨, 내용 : 오늘 부산, 글쓴이 : 김재현
+[ ]
+# 중요한 예제입니다.
+class BlogFactory(object):
+    dataset = []
+
+    def __init__(self, 제목, 내용, 조회수, 글쓴이, 생성날짜):
+        self.title = 제목
+        self.content = 내용
+        self.count = 조회수
+        self.writer = 글쓴이
+        self.create_date = 생성날짜
+        self.dataset.append(self)
+
+    def __str__(self):
+        return f'{len(self.dataset)}. 제목 : {self.title}, 내용 : {self.content[:5]}, 글쓴이 : {self.writer}'
+
+게시글1 = BlogFactory(
+        '오늘 제주의 날씨',
+        '오늘 제주의 날씨는 참 좋네요! 블라블라',
+        '0',
+        '이호준',
+        '2023/05/10',
+    )
+print(게시글1)
+
+게시글2 = BlogFactory(
+        '오늘 부산의 날씨',
+        '오늘 부산의 날씨는 참 좋네요! 블라블라',
+        '1000000',
+        '김재현',
+        '2023/05/10',
+    )
+print(게시글2)
+1. 제목 : 오늘 제주의 날씨, 내용 : 오늘 제주, 글쓴이 : 이호준
+2. 제목 : 오늘 부산의 날씨, 내용 : 오늘 부산, 글쓴이 : 김재현
+!! 클래스 연습문제
+[ ]
+# 각각 class를 만들어주시고, instance를 2개 이상 넣어서
+# 활용(출력, 수정 등) 해보세요.
+# 15분씩 총 30분, 6분에 문제를 냈기 때문에 36분까지 실습해보겠습니다.
+# 각 코드는 만들어서 쓰레드에 올려주세요.
+# 중요한 코드이니 꼭 한 번 만들어보세요! :)
+class UserInfo(object):
+    pass
+
+class BookInfo(object):
+    pass
+[ ]
+# (advanced) 그리고 물건을 사면 물건의 값이 UserInfo를 건드려야 하겠죠. 
+# 물건도 class로 구현해주시면 너무 좋은 예제가 될 것 같네요. 🙂
+
+# (advanced) 실제 github의 유저 정보를 등을 이용해서도 만들어보세요.
+# https://api.github.com/repos/paullabkorea/jupyternotebookblog/languages
+# https://docs.github.com/ko/rest/repos/repos?apiVersion=2022-11-28#get-a-repository
+
+[ ]
+import hashlib
+
+비밀번호 = hashlib.sha256()
+비밀번호.update('helloworld!'.encode('utf-8'))
+비밀번호.hexdigest() # 영화를 집어넣든, 음악을 집어넣든, 소설을 집어넣든, 암호를 집어넣든 모두 64자로 만듭니다.
+
+[ ]
+# 1번째 스탭
+# 공개되는 정보, 공개되지 않는 정보
+# 멤버(정적 수치, 문자열)와 메서드(기능)
+class Product(object):
+    def __init__(self, 품명, 가격):
+        self.product_name = 품명
+        self.price = 가격
+        
+자전거 = Product(
+    '자전거',
+    100000,
+)
+
+class UserInfo(object):
+    def __init__(self, 
+                 이름, 
+                 이메일,
+                 비밀번호, 
+                 주요접속기기, 
+                 주요접속국가, 
+                 주요접속지역, 
+                 마지막접속일자, 
+                 회원가입날짜, 
+                 별명, 
+                 적립금, 
+                 생일, 
+                 휴대폰번호, 
+                 휴대폰인증여부, 
+                 고객등급, 
+                 휴면계정여부):
+        self.이름 = 이름
+        self.고객등급 = 고객등급
+        self.적립금 = 적립금
+    
+    def 물품구매(self, product):
+        self.적립금 -= product.price
+
+    def 회원탈퇴(self):
+        pass
+
+    def 장바구니등록(self):
+        pass
+
+이호준 = UserInfo(
+    이름 = '이호준',
+    이메일 = 'hojun@gmail.com',
+    비밀번호 = '98d234db7e91f5ba026a25d0d6f17bc5ee0a347ea2216b0c9de06d43536d49f4',
+    주요접속기기 = 'Android',
+    주요접속국가 = 'Korea',
+    주요접속지역 = 'Jeju',
+    마지막접속일자 = '23/05/10',
+    회원가입날짜 = '23/05/10',
+    별명 = '준',
+    적립금 = 1000000000,
+    생일 = '13/13',
+    휴대폰번호 = '010-0000-0000',
+    휴대폰인증여부 = True,
+    고객등급 = 'VIP',
+    휴면계정여부 = False,
+)
+
+이호준.물품구매(자전거)
+이호준.적립금
+999900000
+[ ]
+# 광호님 코드
+class BookInfo(object):
+    def __init__(self, title, price, writer, publisher, count, soldout, buyer):
+        self.title = title
+        self.price = price
+        self.writer = writer
+        self.publisher = publisher
+        self.count = count
+        self.soldout = soldout
+        self.buyer = buyer
+
+    def __str__(self):
+        return self.title
+
+    def sell(self, buyer):
+        if self.get_soldout():
+            print('재고가 없습니다')
+            return None
+        
+        self.count -= 1
+        self.add_buyer(buyer)
+        
+        if self.count <= 0:
+           self.set_soldout(True)
+
+    def add_buyer(self, buyer):
+        self.buyer.append(buyer)
+    
+    def set_soldout(self, value):
+        self.soldout = value
+
+    def get_soldout(self):
+        return self.soldout
+[ ]
+# 진찬님 코드
+class BookInfo(object):
+    dataset = []
+
+    def __init__(self, title, writer, publisher, publish_date, price):
+        self.title = title
+        self.writer = writer
+        self.publisher = publisher
+        self.publish_date = publish_date
+        self.price = price
+        self.dataset.append(self)
+
+    def __str__(self):
+        return f'제목: {self.title}, 저자: {self.writer}, 출판사: {self.publisher}, 출판일: {self.publish_date}, 가격: {self.price}'
+    
+book1 = BookInfo(
+    title = '마블',
+    writer = '아이언맨',
+    publisher = '어벤져스',
+    publish_date = '2023/05/10',
+    price = 10000
+)
+print(book1)
+제목: 마블, 저자: 아이언맨, 출판사: 어벤져스, 출판일: 2023/05/10, 가격: 10000
+[ ]
+class Car(object):
+    MaxSpeed = 300
+    MaxPeoeple = 5
+    def __init__(self):
+        pass
+    def move(self, x):
+        pass
+    def stop(self):
+        print('멈췄습니다.')
+    @staticmethod #decorator
+    def 스피드배속(현재스피드, 배속할스피드):
+        print(f'현재 {현재스피드 * 배속할스피드}의 스피드로 달리고 있습니다.')
+
+Car.스피드배속(100, 2) # 붕어빵 찍는 틀이 얼마나 붕어빵을 만들어 냈는가?
+현재 200의 스피드로 달리고 있습니다.
+[ ]
+#예를 들어
+class Hotel:
+    pass
+
+Hotel.빈방있는호텔() # 전체 호텔에 빈방이 있는 호텔
+호텔1.빈방() #호텔1에 빈방이 있는지 여부
+상속
+[ ]
+# 이 예제는 기억하고 있으셔야 합니다.
+class Car:
+    maxSpeed = 300
+    maxPeople = 5
+    def move(self, x):
+        print(x, '의 스피드로 달리고 있습니다.')
+    def stop(self):
+        print('멈췄습니다.')
+
+class HybridCar(Car):
+    battery = 1000
+    batteryKM = 300
+
+class ElectricCar(HybridCar):
+    battery = 2000
+    batteryKM = 600
+[ ]
+dir(k3)
+
+[ ]
+K3 = Car()
+HyK3 = HybridCar()
+ElHyK3 = ElectricCar()
+# id(K3.maxSpeed), id(HyK3.maxSpeed)
+# id(K3.move), id(HyK3.move)
+
+ElHyK3.move(10)
+10 의 스피드로 달리고 있습니다.
+!! 오늘 배운 것 정리
+클래스
+
+클래스는 데이터(멤버)와 기능(메서드)을 가지고 있는 인스턴트 객체를 생성하기 위한 역할
+
+우리가 배우고 있는 Python을 객체 지향 프로그래밍 언어
+
+  현실                                코드
+  차 ---------------------------> class Car()
+  정수 -------------------------> class int()
+  실수 -------------------------> class float()
+
+  인간이 만들어 
+  놓은 현실 세계에서의 
+  정의 또는 약속 --------------> class
+
+  1 + 1 = 2가 컴퓨터 입장에서는 10일 수도 있고
+  'A' + 'A' = 'AA'가 아니라 컴퓨터 입장에서는 130일 수 있습니다.
+  현실세계에서 '인간끼리' 약속을 코드에 세계로 옮긴거에요.
+예제 1
+
+  # 메서드 : 클래스 내에 함수
+  # 멤버 : 클래스 내에 변수
+  # 애트리뷰트 : 멤버 + 메서드
+  class CarFactory(object):
+      max_speed = 300
+      max_people = 5
+      def move(self):
+          print('차가 움직이고 있습니다.')
+      def stop(self):
+          print('차가 멈췄습니다.')
+
+  k5 = CarFactory()
+  k3 = CarFactory()
+  k5.move()
+  k3.move()
+  k5.stop()
+  k3.stop()
+  print(k5.max_speed)
+예제2
+
+  # 클래스 변수
+  # 클래스 바로 하위에 자리하고 있으며
+  # 모든 인스턴스가 공유합니다.
+  # 인스턴스 변수
+  # 인스턴스 영역 안에서만 사용하는 변수
+  class Car(object):
+      # kinds가 인스턴스에 없기에 class변수로 접근
+      # speed는 값을 = 로 할당했기에 인스턴스변수 생성
+      kinds = []
+      speed = 300
+      def add_kinds(self, name):
+          self.kinds.append(name) # self.kinds = [name]로 사용하면 인스턴스 변수가 됩니다.
+      def change_speed(self, speed):
+          self.speed = speed
+
+  k5 = Car()
+  k3 = Car()
+  k5.speed = 500
+  k3.speed # 클래스 변수는 값을 공유한다고 했는데?
+예제3
+
+  # 쉽고 중요한 예제!
+  # 이 코드는 가능하면 손으로 2 ~ 3번 써보시길 권해드립니다.
+
+  class BlogFactory(object):
+      def __init__(self, 제목, 내용, 조회수, 글쓴이, 생성날짜):
+          self.title = 제목
+          self.content = 내용
+          self.count = 조회수
+          self.writer = 글쓴이
+          self.create_date = 생성날짜
+
+  게시글1 = BlogFactory(
+          '오늘 제주의 날씨',
+          '오늘 제주의 날씨는 참 좋네요! 블라블라',
+          '0',
+          '이호준',
+          '2023/05/10',
+      )
+
+  게시글2 = BlogFactory(
+          '오늘 부산의 날씨',
+          '오늘 부산의 날씨는 참 좋네요! 블라블라',
+          '1000000',
+          '김재현',
+          '2023/05/10',
+      )
+
+  게시글3 = BlogFactory(
+          '오늘 강원의 날씨',
+          '오늘 강원의 날씨는 참 좋네요! 블라블라',
+          '10000',
+          '범남궁',
+          '2023/05/10',
+      )
+
+  data = [게시글1, 게시글2, 게시글3]
+  for i in data:
+      if i.writer == '이호준':
+          print(i.title)
+          print(i.content)
+          print(i.count)
+          print(i.create_date)
+클래스 상속
+
+클래스에서 상속은 상속해주는 클래스(Parent Class, Super class)의 내용(속성과 메소드)을 상속받는 클래스(Child class, sub class)가 가지게 되는 것
+
+코드 예
+
+  # 이 예제는 기억하고 있으셔야 합니다.
+  class Car:
+      maxSpeed = 300
+      maxPeople = 5
+      def move(self, x):
+          print(x, '의 스피드로 달리고 있습니다.')
+      def stop(self):
+          print('멈췄습니다.')
+
+  class HybridCar(Car):
+      battery = 1000
+      batteryKM = 300
+
+  class ElectricCar(HybridCar):
+      battery = 2000
+      batteryKM = 600
+
+  K3 = Car()
+  HyK3 = HybridCar()
+  ElHyK3 = ElectricCar()
+  # id(K3.maxSpeed), id(HyK3.maxSpeed)
+  # id(K3.move), id(HyK3.move)
+
+  ElHyK3.move(10)
+[ ]
+# 질문 : id를 객체가 아니라 count라는 정수값을 지정해줘서 증가시키고 싶습니다.
+# 답 : 아래코드처럼 사용하시면 됩니다.
+class BlogFactory(object):
+
+    count = 0
+
+    def __init__(self, 제목, 내용, 조회수, 글쓴이, 생성날짜):
+        BlogFactory.count += 1
+        self.id = BlogFactory.count
+        self.title = 제목
+
+1. 제목 : 오늘 제주의 날씨, 내용 : 오늘 제주
+2. 제목 : 오늘 부산의 날씨, 내용 : 오늘 부산
+[ ]
+# 자율학습시간에 대한 피드백 => 문제를 내드리기로 하였습니다.
+# 매일 3시 40분 즈음에 advanced 문제를 드리고 각 조별 단톡방에 해당 내용을 공유하고 얘기하는 시간을 가지기로 하였습니다.
+[ ]
+print(chr(ord("生") & ord("死")))
+愛
