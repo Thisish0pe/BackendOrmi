@@ -1,0 +1,154 @@
+# 크롤링, 웹 스크래핑 : 웹에 있는 데이터를 가지고 온다!
+# 데이터를 가져오는 라이브러리 : requests
+# 가져온 데이터를 가공하는 라이브러리 : beautifulsoup
+# 크롤링대상 : https://paullab.co.kr/stock.html
+
+import requests
+from bs4 import BeautifulSoup
+
+response = requests.get('http://www.paullab.co.kr/stock.html')
+
+response.encoding = 'utf-8'
+html = response.text
+
+soup = BeautifulSoup(html, 'html.parser')
+
+html
+
+soup.title
+<title>Document</title>
+
+soup.select('.tables')
+Output exceeds the size limit. Open the full output data in a text editor[<div class="tables">
+ <table class="border-style" summary="시가총액 정보">
+ <tr>
+ <th class="strong" scope="row">시가총액</th>
+ <!-- 공백은 의도적으로 넣은 것입니다. -->
+ <td class="strong"><em id="_market_sum">349조 2,323</em>억원</td>
+ </tr>
+ <tr>
+ <th scope="row">
+ <a class="link_site" href="#">시가총액순위<i class="fas fa-caret-right"></i></a>
+ </th>
+ <!-- 공백은 의도적으로 넣은 것입니다. -->
+ <td>위니브월드 <em id="_market_sum">1</em>위</td>
+ </tr>
+ <tr>
+ <th scope="row">상장주식수</th>
+ <!-- 공백은 의도적으로 넣은 것입니다. -->
+ <td><em id="_market_sum">5,969,782,550</em></td>
+ </tr>
+ </table>
+ <table class="border-style" summary="업종상세 정보">
+ <tr>
+ <th class="strong" scope="row">현재가</th>
+ <td class="strong"><em id="_market_sum">349조 2,323</em>억원</td>
+ </tr>
+...
+ <!-- <td><em id="_market_sum">2조 9,012억원</em></td> -->
+ <td><em id="_market_sum">2,901,231,823,969원</em></td>
+ </tr>
+ </table>
+ </div>]
+ 
+총액정보 = soup.select('.tables')
+총액정보[0].select('table')[0]
+<table class="border-style" summary="시가총액 정보">
+<tr>
+<th class="strong" scope="row">시가총액</th>
+<!-- 공백은 의도적으로 넣은 것입니다. -->
+<td class="strong"><em id="_market_sum">349조 2,323</em>억원</td>
+</tr>
+<tr>
+<th scope="row">
+<a class="link_site" href="#">시가총액순위<i class="fas fa-caret-right"></i></a>
+</th>
+<!-- 공백은 의도적으로 넣은 것입니다. -->
+<td>위니브월드 <em id="_market_sum">1</em>위</td>
+</tr>
+<tr>
+<th scope="row">상장주식수</th>
+<!-- 공백은 의도적으로 넣은 것입니다. -->
+<td><em id="_market_sum">5,969,782,550</em></td>
+</tr>
+</table>
+
+총액정보 = soup.select('#_market_sum')
+총액정보[2].text
+'5,969,782,550'
+
+import requests
+from bs4 import BeautifulSoup
+
+response = requests.get('https://search.zum.com/search.zum?method=uni&option=accu&rd=1&query=%EC%B5%9C%EC%8B%A0%EC%98%81%ED%99%94&qm=f_typing.top')
+
+response.encoding = 'utf-8'
+html = response.text
+
+soup = BeautifulSoup(html, 'html.parser')
+
+soup.select('p.title > span')
+[<span title="칠중주: 홍콩 이야기">칠중주: 홍콩 이야기</span>,
+ <span title="문재인입니다">문재인입니다</span>,
+ <span title="롱디">롱디</span>,
+ <span title="유랑지구2">유랑지구2</span>,
+ <span title="스트리머">스트리머</span>,
+ <span title="가디언즈 오브 갤럭시: Volume 3">가디언즈 오브 갤럭시: Volume 3</span>,
+ <span title="슈퍼 마리오 브라더스">슈퍼 마리오 브라더스</span>,
+ <span title="드림">드림</span>,
+ <span title="존 윅 4">존 윅 4</span>,
+ <span title="스즈메의 문단속">스즈메의 문단속</span>]
+ 
+ for i in soup.select('p.title > span'):
+    print(i.text)
+ 칠중주: 홍콩 이야기
+문재인입니다
+롱디
+유랑지구2
+스트리머
+가디언즈 오브 갤럭시: Volume 3
+슈퍼 마리오 브라더스
+드림
+존 윅 4
+스즈메의 문단속
+
+for i, j in enumerate(soup.select('p.title > span'), 1):
+    print(i, j.text)
+1 칠중주: 홍콩 이야기
+2 문재인입니다
+3 롱디
+4 유랑지구2
+5 스트리머
+6 가디언즈 오브 갤럭시: Volume 3
+7 슈퍼 마리오 브라더스
+8 드림
+9 존 윅 4
+10 스즈메의 문단속
+
+for i in soup.select('.thumb > img'):
+    print('https:' + i['src'])
+https://cc.zumst.com/cv2/movie/c15df9263fb2e917fa1d15e7d3bca3b8930505ce28d3d4641fa2252ce036427e.jpg?w=110&h=152&q=90
+https://cc.zumst.com/cv2/movie/de2674490335079c6b492add654db4d2c0e945afb454b85e3d58219fe0bdd9ef.jpg?w=110&h=152&q=90
+https://cc.zumst.com/cv2/movie/a44fc6e40c3f6c73cfb22f7a768962538171069b154c905ef339d40aa39f3094.jpg?w=110&h=152&q=90
+https://cc.zumst.com/cv2/movie/dfea3dea92cf047d108cfff5ebe667a1452f0c5e67c319ba97700588f869902f.jpg?w=110&h=152&q=90
+https://cc.zumst.com/cv2/movie/4b9bdde9b5cfaeed8c921e6eb0d8d0bfeb37fa36aaccaaad4ca39b9f2c2689bb.jpg?w=110&h=152&q=90
+https://cc.zumst.com/cv2/movie/c27c5483130f01823998482dc83601947ee88ebb13bce54a7f022c5c16ed941b.jpg?w=110&h=152&q=90
+https://cc.zumst.com/cv2/movie/847fe41b186a8bbf9e7cac08a6f8ca025d090902c5b17c7779adca8cffb32c21.jpg?w=110&h=152&q=90
+https://cc.zumst.com/cv2/movie/0d1e24efb772daef66ce598952e01a4fc857003faec26ed751bceaa63903c6f5.jpg?w=110&h=152&q=90
+https://cc.zumst.com/cv2/movie/ae1930a1e5bc51bf77cbe85358aad1a2a66b392f4c6b54c5665a143f3b241765.jpg?w=110&h=152&q=90
+https://cc.zumst.com/cv2/movie/11f7ca7df32c46f3e82b67dadd2a15c4282dfb06ad6d5b732275472d860deb5b.jpg?w=110&h=152&q=90
+
+titles = []
+for i in soup.select('p.title > span'):
+    titles.append(i.text)
+
+imgs = []
+for i in soup.select('.thumb > img'):
+    imgs.append('https:' + i['src'])
+    
+with open("index.html", "w") as f:
+    s = '<h1>영화순위</h1>'
+    for title, img in zip(titles, imgs):
+        s += f'<h2>{title}</h2>'
+        s += f'<img src={img}>'
+    f.write(s)
