@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <script>
+        const canvas = document.querySelector('#canvas');
+        const ctx = canvas.getContext('2d');
+
+        // 선언식
+        // function play() {
+
+        // }
+
+        let xPos = 0;
+        // 표현식 (expression) -> 호이스팅을 막을 수 있음
+        // 화살표 함수 function 을 생략할 수 있음 
+        const play = () => {
+            // 만들어진 네모 지우자
+            // x축, y축, 넓이, 부피
+            ctx.clearRect(0, 0, 500, 500);
+            // 네모
+            ctx.fillRect(xPos, 0, 50, 50);
+
+            // play 함수가 실행될 때 마다 1씩 늘려주겠다.
+            xPos += 6;
+
+            if(xPos > 500){
+                xPos = 0
+            }
+
+            requestAnimationFrame(play);
+        }
+
+        // const play = function () {
+
+        // }
+        requestAnimationFrame(play);
+    </script>
+</body>
+</html>
