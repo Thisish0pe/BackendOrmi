@@ -1,6 +1,6 @@
 # blog/forms.py
 from django import forms
-from .models import Post
+from .models import Post, Comment, HashTag
 
 # Form 일반 작성 법 () : html에 있는 form 태그
 # Model Form 작성 법 [] : model 을 사용하는 form
@@ -11,4 +11,23 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['title', 'content'] #form 어떤 걸 제공할꺼야?
+    
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ['content']
+        # widgets 화면출력과 관련된 것 
+        widgets = {
+            'content': forms.Textarea(attrs={'rows' : '3', 'cols' : '50'})
+        }
+        #attrs 속성 값 주는 것 : 속성은 html 속성 값을 줄 수 있다.
+
+
+class HashTagForm(forms.ModelForm):
+    
+    class Meta:
+        model = HashTag
+        fields = ['name']
